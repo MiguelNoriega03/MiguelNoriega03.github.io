@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import HeroCesar from '../assets/images/HeroCesar.jpeg';
+import HeroMiguel from '../assets/images/HeroMiguel.JPG';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -13,6 +16,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <h3 class="font-serif text-xl leading-tight font-medium sm:text-2xl mb-3">
                     Miguel Ángel Noriega
                 </h3>
+                <Image 
+                    src={HeroMiguel} 
+                    alt="Miguel Ángel Noriega"
+                    class="w-full rounded-lg mb-4"
+                    width={1200}
+                    height={1200}
+                    quality={95}
+                />
                 <div class="text-sm leading-normal text-justify">
                   Lidera iniciativas de análisis de datos e inteligencia artificial aplicadas a estrategias comerciales. Cuenta con experiencia práctica en ventas y en el diseño e implementación de sistemas comerciales, habiendo asesorado a diversas organizaciones en la optimización de sus procesos de negocio mediante soluciones tecnológicas avanzadas. Su dominio en la aplicación de modelos de Machine y Deep Learning le ha permitido impulsar transformaciones digitales enfocadas en mejorar la eficiencia y el crecimiento de los clientes, siempre con un enfoque riguroso y orientado a resultados. Miguel es Ingeniero Industrial y de Sistemas egresado del Tecnológico de Monterrey, con especialización en Inteligencia Artificial (IA) y aprendizaje automático, formación que sustenta su enfoque técnico y visión estratégica.
                 </div>
@@ -23,6 +34,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <h3 class="font-serif text-xl leading-tight font-medium sm:text-2xl mb-3">
                     César Augusto Cid
                 </h3>
+                <Image 
+                    src={HeroCesar} 
+                    alt="César Augusto Cid"
+                    class="w-full rounded-lg mb-4"
+                    width={1200}
+                    height={1200}
+                    quality={95}
+                />
                 <div class="text-sm leading-normal text-justify">
 Lidera iniciativas de finanzas corporativas y rentabilidad aplicadas a estrategias comerciales. Cuenta con experiencia práctica en ventas y en el diseño e implementación de sistemas comerciales, habiendo acompañado a diversas organizaciones en la mejora de su desempeño comercial mediante métricas y criterios financieros de decisión. Su dominio en pricing, estructura de márgenes y flujo de efectivo le ha permitido impulsar crecimiento sostenible, alineando el desempeño comercial con objetivos de rentabilidad, siempre con un enfoque riguroso y orientado a resultados. César es Licenciado en Finanzas egresado del Tecnológico de Monterrey, con especialización en finanzas corporativas, formación que sustenta su visión financiera y estratégica.            </div>
         </div>
