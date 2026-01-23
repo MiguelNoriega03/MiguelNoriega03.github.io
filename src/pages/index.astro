@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import HeroCesar from '../assets/images/HeroCesar.jpeg';
+import HeroMiguel from '../assets/images/HeroMiguel.JPG';
 import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
 import siteConfig from '../data/site-config';
@@ -65,24 +68,47 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
     <section class="mb-16 sm:mb-24">
         <h2 class="mb-12 font-serif text-3xl font-medium sm:mb-16 sm:text-5xl">¿Quiénes Somos?</h2>
         
-        <div class="mb-10 sm:mb-12">
+        <div class="mb-10 sm:mb-12 flex flex-col sm:flex-row gap-6 items-start">
+            <Image 
+                src={HeroMiguel} 
+                alt="Miguel Ángel Noriega"
+                class="max-w-xs rounded-lg flex-shrink-0"
+                width={1200}
+                height={1200}
+                quality={95}
+            />
             <div class="grow">
-                <h3 class="font-serif text-xl leading-tight font-medium sm:text-2xl">
+                <h3 class="font-serif text-2xl leading-tight font-medium sm:text-4xl mb-3">
                     Miguel Ángel Noriega
                 </h3>
-                <div class="mt-3 text-sm leading-normal">
-                    Inner Circle es una consultora creada para ayudar a crecer sin improvisación. Somos un equipo joven, y de alto involucramiento: entramos a profundidad, entendemos el negocio desde adentro y construimos soluciones con método, claridad y ejecución real. No venimos a "dar recomendaciones"; venimos a resolver, medir y dejar funcionando.
+                <div class="text-sm leading-relaxed space-y-2">
+                    <p>• IA y datos aplicados a ventas y estrategia comercial</p>
+                    <p>• Diseña e implementa sistemas comerciales que quedan funcionando</p>
+                    <p>• Enfoque: método, claridad, ejecución y medición</p>
+                    <p>• Ing. Industrial y de Sistemas (Tec de Monterrey)</p>
+                    <p>•Especialización en IA</p>
                 </div>
             </div>
         </div>
 
-        <div class="mb-10 sm:mb-12">
+        <div class="mb-10 sm:mb-12 flex flex-col sm:flex-row gap-6 items-start">
+            <Image 
+                src={HeroCesar} 
+                alt="César Augusto Cid"
+                class="max-w-xs rounded-lg flex-shrink-0"
+                width={1200}
+                height={1200}
+                quality={95}
+            />
             <div class="grow">
-                <h3 class="font-serif text-xl leading-tight font-medium sm:text-2xl">
+                <h3 class="font-serif text-2xl leading-tight font-medium sm:text-4xl mb-3">
                     César Augusto Cid
                 </h3>
-                <div class="mt-3 text-sm leading-normal">
-                    Nuestra ventaja está en la combinación: ingeniería e IA aplicada con finanzas y rentabilidad, y experiencia práctica en ventas y su implementación. Estamos construyendo nuestro nombre, y por eso trabajamos con un estándar simple: si tomamos tu proyecto, es para responder con seriedad y no fallarte.
+                <div class="text-sm leading-relaxed space-y-2">
+                    <p>• Finanzas y rentabilidad aplicadas a decisiones comerciales</p>
+                    <p>• Pricing, márgenes y flujo de efectivo para crecer con control</p>
+                    <p>• Convierte ventas en métricas y criterios de decisión</p>
+                    <p>• Lic. en Finanzas (Tec de Monterrey) | Especialización en finanzas corporativas</p>
                 </div>
             </div>
         </div>
