@@ -3,7 +3,6 @@ import type { GetStaticPathsOptions, Page } from 'astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Pagination from '../../components/Pagination.astro';
 import PostPreview from '../../components/PostPreview.astro';
-import Subscribe from '../../components/Subscribe.astro';
 import siteConfig from '../../data/site-config';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
@@ -20,8 +19,19 @@ const blog = page.data;
 ---
 
 <BaseLayout title="Blog" description="Embark on a journey of personal insights and experiences through my blog" showHeader={false}>
-    <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">Blog Archive</h1>
+    <h1 class="mb-4 font-serif text-2xl leading-tight italic sm:mb-8 sm:text-4xl">Insights</h1>
+    <p class="mb-12 text-base sm:text-lg text-theme-foreground/90">Publicamos aprendizajes accionables cuando cerramos etapas relevantes con clientes: sistemas comerciales, finanzas, automatización e IA.</p>
     {blog.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
-    <Pagination page={page} class="my-16 sm:my-24" />
-    <Subscribe class="my-16 sm:my-24" />
+        <Pagination page={page} class="my-16 sm:my-24" />
+        <div class="flex flex-col items-center justify-center my-16" style="border: 3px solid red;">
+            <a
+                href="https://wa.me/5215534532591?text=Hola%20Miguel%2C%20quiero%20un%20diagn%C3%B3stico%20para%20mi%20empresa"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-green-500 hover:bg-green-600 text-white font-extrabold text-2xl sm:text-3xl py-5 px-10 rounded-xl shadow-xl border-2 border-green-600 hover:border-green-700 transition-all duration-200 tracking-tight text-center mt-8"
+                style="letter-spacing: -0.03em;"
+            >
+                DIAGNÓSTICO VISIBLE
+            </a>
+        </div>
 </BaseLayout>

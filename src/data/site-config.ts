@@ -8,8 +8,8 @@ const siteConfig: SiteConfig = {
         src: avatar,
         alt: 'Ethan Donovan'
     },
-    title: 'Dante',
-    subtitle: 'Minimal Astro.js theme',
+    title: '',
+    subtitle: '',
     description: 'Astro.js and Tailwind CSS theme for blog and portfolio by justgoodui.com',
     image: {
         src: '/dante-preview.jpg',
@@ -21,15 +21,19 @@ const siteConfig: SiteConfig = {
             href: '/'
         },
         {
-            text: 'Projects',
+            text: 'Casos de Exito', // antes Projects
             href: '/projects'
         },
         {
-            text: 'Blog',
+            text: 'Insights', // antes Blog
             href: '/blog'
         },
         {
-            text: 'Tags',
+            text: '¿Quiénes Somos?',
+            href: '/quienes-somos'
+        },
+        {
+            text: 'Contáctanos', // antes Resources/Tags
             href: '/tags'
         }
     ],
@@ -66,16 +70,20 @@ const siteConfig: SiteConfig = {
         }
     ],
     hero: {
-        title: 'Hi There & Welcome to My Corner of the Web!',
-        text: "I'm **Ethan Donovan**, a web developer at Amazing Studio, dedicated to the realms of collaboration and artificial intelligence.\nMy approach involves embracing intuition, conducting just enough research, and leveraging aesthetics as a catalyst for exceptional products.\nI have a profound appreciation for top-notch software, visual design, and the principles of product-led growth.\n\nFeel free to explore some of my coding endeavors on [GitHub](https://github.com/JustGoodUI/dante-astro-theme) or follow me on [Twitter/X](https://twitter.com/justgoodui).",
+        title: 'Nosotros',
+        text: 'Inner Circle es una consultora creada para ayudar a crecer sin improvisación. Somos un equipo joven, y de alto involucramiento: entramos a profundidad, entendemos el negocio desde adentro y construimos soluciones con método, claridad y ejecución real. No venimos a "dar recomendaciones"; venimos a resolver, medir y dejar funcionando.\n\nNuestra ventaja está en la combinación: ingeniería e IA aplicada con finanzas y rentabilidad, y experiencia práctica en ventas y su implementación Estamos construyendo nuestro nombre, y por eso trabajamos con un estándar simple: si tomamos tu proyecto, es para responder con seriedad y no fallarle a nuestros clientes.\n\n\n',
         image: {
             src: hero,
-            alt: 'A person sitting at a desk in front of a computer'
+            alt: 'Consultoría empresarial, estrategia y tecnología'
         },
         actions: [
             {
-                text: 'Get in Touch',
-                href: '/contact'
+                text: 'Solicitar diagnóstico',
+                href: 'https://wa.me/525559446719?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20un%20diagn%C3%B3stico%20para%20mi%20empresa'
+            },
+            {
+                text: 'Casos de Éxito',
+                href: '/projects'
             }
         ]
     },

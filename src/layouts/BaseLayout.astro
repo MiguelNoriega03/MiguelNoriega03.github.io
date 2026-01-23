@@ -23,10 +23,10 @@ const { showHeader = true, ...head } = Astro.props;
         <script is:inline src="/theme-toggle.js"></script>
     </head>
     <body class="bg-main text-main">
-        <div class="flex min-h-screen flex-col px-4 md:px-8">
+        <div class="flex min-h-screen flex-col px-4 md:px-8" style="padding-top:0;margin-top:0;">
             <Nav />
             {showHeader && <Header />}
-            <main class="mx-auto w-full max-w-3xl grow">
+            <main class="mx-auto w-full max-w-3xl grow" style="padding-top:0;margin-top:0;">
                 <slot />
             </main>
             <Footer />

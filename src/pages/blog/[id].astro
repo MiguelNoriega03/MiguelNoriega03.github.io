@@ -4,7 +4,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/Button.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import PostPreview from '../../components/PostPreview.astro';
-import Subscribe from '../../components/Subscribe.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 import { slugify } from '../../utils/common-utils';
 
@@ -74,7 +73,18 @@ const { Content } = await render(post);
             </div>
         )
     }
-    <Subscribe class="my-16 sm:my-24" />
+        <div class="my-16 sm:my-24 flex flex-col items-center gap-8 bg-theme-accent/10 rounded-xl py-14 px-4">
+            <h2 class="font-serif text-3xl sm:text-4xl text-center font-bold tracking-tight">¿Quieres un diagnóstico?</h2>
+            <a
+                href="https://wa.me/5215534532591?text=Hola%20Miguel%2C%20quiero%20un%20diagn%C3%B3stico%20para%20mi%20empresa"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-green-500 hover:bg-green-600 text-white font-extrabold text-3xl sm:text-4xl py-7 px-16 rounded-2xl shadow-2xl border-4 border-green-600 hover:border-green-700 transition-all duration-200 tracking-tight"
+                style="letter-spacing: -0.03em;"
+            >
+                Solicitar diagnóstico
+            </a>
+        </div>
 </BaseLayout>
 
 <script>

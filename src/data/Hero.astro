@@ -1,0 +1,52 @@
+---
+
+import { marked } from 'marked';
+import type { Hero as HeroProps } from '../types';
+import Button from './Button.astro';
+import CustomImage from './CustomImage.astro';
+
+type Props = HeroProps;
+
+const { title, image, text, actions, bullets } = Astro.props;
+---
+
+{
+    (title || image?.src || text || (actions && actions.length > 0)) && (
+        <section class="flex w-full flex-col mt-0 pt-0 relative">
+            {image?.src && (
+                <figure class="mb-8">
+                    <CustomImage
+                        class="w-full"
+                        {...image}
+                        widths={[480, 640, 768, 1024, 1536]}
+                        sizes="(min-width: 832px) 768px, calc(100vw - 32px)"
+                        fetchpriority="high"
+                        loading="eager"
+                    />
+                    {image.caption && <figcaption class="mt-1.5 text-xs sm:text-sm">{image.caption}</figcaption>}
+                </figure>
+            )}
+            {title && <h1 class="font-serif text-3xl leading-tight font-medium sm:text-5xl sm:leading-tight">{title}</h1>}
+            {text && <div class="prose sm:prose-lg max-w-none mb-12" set:html={marked.parse(text)} />}
+            {bullets && bullets.length > 0 && (
+                <ul class="mb-2 mt-2 space-y-1 text-base sm:text-lg">
+                    {bullets.map((bullet) => (
+                        <li class="pl-4 list-disc list-inside text-theme-foreground/90">{bullet}</li>
+                    ))}
+                </ul>
+            )}
+            {actions && actions.length > 0 && (
+                <div class="flex flex-wrap gap-4 mb-16">
+                    {actions.map((action, idx) => (
+                        <Button
+                            href={action.href}
+                            style={idx === 0 ? "background-color: #16a34a; color: white; border-color: #16a34a; font-weight: 700;" : ""}
+                        >
+                            {action.text}
+                        </Button>
+                    ))}
+                </div>
+            )}
+        </section>
+    )
+}

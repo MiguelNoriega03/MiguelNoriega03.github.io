@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import ArrowRight from '../../assets/icons/arrow-right.svg';
 import Subscribe from '../../components/Subscribe.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllTags, getPostsByTag, sortItemsByDateDesc } from '../../utils/data-utils';
@@ -14,30 +13,22 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
 ---
 
 <BaseLayout
-    title="Tags"
-    description="Explore tag directory for easy navigation and discovery. Find a wide range of topics, articles, and insights organized by tags, making it effortless to locate the content that interests you most."
+    title="Resources"
+    description="Explora contenido por tema: ventas, finanzas, automatización, IA y procesos."
     showHeader={false}
 >
-    <h1 class="mb-12 font-serif text-2xl italic sm:mb-16 sm:text-4xl">All Tags</h1>
-    {
-        tags.map((tag) => {
-            const postCount = getPostsByTag(posts, tag.id).length;
-            return (
-                <a class="group mb-10 flex items-start justify-between gap-8 sm:mb-12" href={`/tags/${tag.id}`}>
-                    <div class="grow">
-                        <h2 class="font-serif text-xl leading-tight font-medium group-hover:underline group-hover:decoration-dashed group-hover:decoration-1 group-hover:underline-offset-4 sm:text-2xl">
-                            {tag.name}
-                        </h2>
-                        <div class="mt-1 text-sm leading-normal">
-                            {postCount} {postCount === 1 ? 'post' : 'posts'}
-                        </div>
-                    </div>
-                    <div class="hidden font-serif italic opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:shrink-0 sm:items-center sm:gap-1">
-                        View Tag Archive <ArrowRight class="h-4 w-4 fill-current" />
-                    </div>
-                </a>
-            );
-        })
-    }
+    <h1 class="mb-4 font-serif text-2xl italic sm:mb-8 sm:text-4xl">Resources</h1>
+        <p class="mb-8 text-base sm:text-lg text-theme-foreground/90">Explora contenido por tema: ventas, finanzas, automatización, IA y procesos.</p>
+                <!-- Tags sugeridos en el lugar de los tags dinámicos -->
+        <div class="mb-12 flex flex-wrap gap-3">
+            <a href="/tags/sales-systems" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">Sales Systems</a>
+            <a href="/tags/crm-follow-up" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">CRM &amp; Follow-Up</a>
+            <a href="/tags/finance" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">Finance</a>
+            <a href="/tags/automation" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">Automation</a>
+            <a href="/tags/ai-for-smb" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">AI for SMB</a>
+            <a href="/tags/hiring" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">Hiring</a>
+            <a href="/tags/case-studies" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">Case Studies</a>
+        </div>
+    {/* Aquí se eliminan los tags dinámicos, solo sugeridos */}
     <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>
