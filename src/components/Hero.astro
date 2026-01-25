@@ -62,14 +62,4 @@ const { title, image, text, actions, bullets } = Astro.props;
         -ms-hyphens: auto;
         hyphens: auto;
     }
-    
-    /* En móvil (<768px): alineado a la izquierda para evitar huecos */
-    @media (max-width: 767px) {
-        .hero-text :global(p) {
-            text-align: left;
-            hyphens: none;
-            -webkit-hyphens: none;
-            -ms-hyphens: none;
-        }
-    }
 </style>
