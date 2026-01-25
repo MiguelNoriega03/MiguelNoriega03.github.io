@@ -27,7 +27,7 @@ const { title, image, text, actions, bullets } = Astro.props;
                 </figure>
             )}
             {title && <h1 class="font-serif text-3xl leading-tight font-medium sm:text-5xl sm:leading-tight">{title}</h1>}
-            {text && <div class="prose sm:prose-lg max-w-none mb-12" set:html={marked.parse(text)} />}
+            {text && <div class="prose sm:prose-lg max-w-none mb-12 hero-text" set:html={marked.parse(text)} />}
             {bullets && bullets.length > 0 && (
                 <ul class="mb-2 mt-2 space-y-1 text-base sm:text-lg">
                     {bullets.map((bullet) => (
@@ -52,3 +52,24 @@ const { title, image, text, actions, bullets } = Astro.props;
         </section>
     )
 }
+
+<style>
+    /* Justificado para el texto del hero */
+    .hero-text :global(p) {
+        text-align: justify;
+        text-justify: inter-word;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+    }
+    
+    /* En móvil (<768px): alineado a la izquierda para evitar huecos */
+    @media (max-width: 767px) {
+        .hero-text :global(p) {
+            text-align: left;
+            hyphens: none;
+            -webkit-hyphens: none;
+            -ms-hyphens: none;
+        }
+    }
+</style>
