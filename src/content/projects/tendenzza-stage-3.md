@@ -12,7 +12,7 @@ isFeatured: true
 ![KPIs Etapa 3](../../assets/images/KPIETAPA3.png)
 
 <div style="text-align: center;">
-<a href="https://wa.me/525559446719?text=Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20los%20planes%20de%20contrataci%C3%B3n" style="display: inline-block; background-color: #25D366; color: black; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 20px 0;">Solicitar Plan de Contratación7</a>
+<a href="https://wa.me/525559446719?text=Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20los%20planes%20de%20contrataci%C3%B3n" style="display: inline-block; background-color: #25D366; color: black; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 20px 0;">Solicitar Plan de Contratación</a>
 </div>
 
 ## El Cliente
