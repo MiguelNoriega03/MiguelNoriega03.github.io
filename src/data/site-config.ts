@@ -8,7 +8,7 @@ const siteConfig: SiteConfig = {
         src: avatar,
         alt: 'Inner Circle'
     },
-    title: 'Inner Circle',
+    title: 'Inner Circle Consulting',
     subtitle: 'Consultoría Empresarial',
     description: 'Inner Circle es una consultora para crecer sin improvisación. Nos involucramos a fondo y convertimos estrategia en ejecución.',
     image: {
