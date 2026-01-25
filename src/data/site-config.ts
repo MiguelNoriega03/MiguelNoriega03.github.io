@@ -71,7 +71,7 @@ const siteConfig: SiteConfig = {
     ],
     hero: {
         title: 'Nosotros',
-        text: 'Inner Circle es una consultora creada para ayudar a crecer sin improvisación. Somos un equipo de alto involucramiento: entramos a profundidad, entendemos el negocio y construimos soluciones con método, claridad y ejecución real. \n\nNuestra ventaja está en la combinación de ingeniería e IA aplicada con finanzas y rentabilidad, y experiencia práctica en ventas. Trabajamos con un estándar simple: si tomamos un proyecto, es para hacernos responsables del resultado y no fallarle a nuestros clientes.',
+        text: 'Inner Circle es una consultora para crecer sin improvisación. Nos involucramos a fondo y convertimos estrategia en ejecución: implementamos, medimos y dejamos operando. Combinamos ingeniería e IA aplicada con finanzas, rentabilidad y experiencia real en ventas. Nuestro estándar es simple: si tomamos un proyecto, nos hacemos responsables del resultado y no le fallamos a nuestros clientes.',
         image: {
             src: hero,
             alt: 'Consultoría empresarial, estrategia y tecnología'
