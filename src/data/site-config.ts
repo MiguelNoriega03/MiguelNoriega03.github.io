@@ -3,17 +3,17 @@ import hero from '../assets/images/hero.jpg';
 import type { SiteConfig } from '../types';
 
 const siteConfig: SiteConfig = {
-    website: 'https://example.com',
+    website: 'https://innercircle.mx',
     avatar: {
         src: avatar,
-        alt: 'Ethan Donovan'
+        alt: 'Inner Circle'
     },
-    title: '',
-    subtitle: '',
-    description: 'Astro.js and Tailwind CSS theme for blog and portfolio by justgoodui.com',
+    title: 'Inner Circle',
+    subtitle: 'Consultoría Empresarial',
+    description: 'Inner Circle es una consultora para crecer sin improvisación. Nos involucramos a fondo y convertimos estrategia en ejecución.',
     image: {
-        src: '/dante-preview.jpg',
-        alt: 'Dante - Astro.js and Tailwind CSS theme'
+        src: '/hero.jpg',
+        alt: 'Inner Circle - Consultoría empresarial, estrategia y tecnología'
     },
     headerNavLinks: [
         {
