@@ -20,7 +20,7 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
     <Hero {...siteConfig.hero} />
     {
         featuredProjects?.length > 0 && (
-            <div class="mb-16 sm:mb-24">
+            <div id="casos-de-exito" class="mb-16 sm:mb-24">
                 {/* Cards Tendenzza Results */}
                 <div class="space-y-10 sm:space-y-12">
                     <div class="rounded-lg border border-main/20 bg-white dark:bg-zinc-900 dark:border-zinc-700 p-6 shadow-sm">
@@ -81,6 +81,7 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
                 <h3 class="font-serif text-2xl leading-tight font-medium sm:text-4xl mb-3">
                     Miguel Ángel Noriega
                 </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Socio Fundador | Inner Circle</p>
                 <div class="text-sm leading-relaxed space-y-2 text-left">
                     <p>• IA para crecimiento: predicción, priorización y automatización comercial</p>
                     <p>• 8+ modelos en producción para empresas líderes: riesgo, forecast y recomendación</p>
@@ -88,8 +89,10 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
                     <p>• Sistemas de ventas a la medida: CRM, KPIs, proceso y seguimiento</p>
                     <p>• Ing. Industrial y de Sistemas | Minor en Machine & Deep Learning (IA) — Tec de Monterrey</p>
                 </div>
+                <p class="text-xs text-gray-500 dark:text-gray-500 mt-4 italic">Trabajo bajo confidencialidad (NDA) | Implementación end-to-end | Enfoque en resultados</p>
             </div>
         </div>
+    
 
         <div class="mb-10 sm:mb-12 flex flex-col sm:flex-row gap-6 items-start">
             <Image 
@@ -104,6 +107,7 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
                 <h3 class="font-serif text-2xl leading-tight font-medium sm:text-4xl mb-3">
                     César Augusto Cid
                 </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Socio Fundador | Inner Circle</p>
                 <div class="text-sm leading-relaxed space-y-2 text-left">
                     <p>• Finanzas corporativas para escalar: rentabilidad y control operativo</p>
                     <p>• Pricing y márgenes para empresas líderes: decisiones respaldadas por economía unitaria (unit economics)</p>
@@ -111,11 +115,17 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
                     <p>• Sistemas comerciales rentables: métricas, disciplina y protección de margen</p>
                     <p>• Lic. en Finanzas | Minor en Banca de Inversión — Tec de Monterrey</p>
                 </div>
+                <p class="text-xs text-gray-500 dark:text-gray-500 mt-4 italic">Trabajo bajo confidencialidad (NDA) | Implementación end-to-end | Enfoque en resultados</p>
             </div>
         </div>
-
-        <div class="mt-12 sm:mt-16">
-            <Button href="/quienes-somos">Conócenos más</Button>
+        <div class="flex justify-center gap-4">
+            <Button href="/quienes-somos">Ver trayectoria completa</Button>
+            <a
+                href="#casos-de-exito"
+                class="inline-flex items-center gap-2 rounded border border-red-600 bg-red-600 px-5 py-2 text-white font-semibold hover:bg-red-700 transition-colors"
+            >
+                Casos de Éxito
+            </a>
         </div>
     </section>
 </BaseLayout>
