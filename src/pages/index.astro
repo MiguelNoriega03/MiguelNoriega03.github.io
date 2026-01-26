@@ -21,44 +21,56 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
     
     {/* Sección Servicios - Tarjetas IA y Ventas */}
     <section class="mb-16 sm:mb-24">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
             {/* Tarjeta IA */}
-            <div class="flex flex-col rounded-xl border border-gray-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 p-6 sm:p-8 shadow-sm">
+            <div class="flex flex-col h-full rounded-xl border border-gray-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 p-6 sm:p-8 shadow-sm">
                 <div class="flex-grow">
                     <h3 class="font-serif text-xl sm:text-2xl font-semibold mb-4 leading-tight">
                         No te quedes atrás: haz que la <span class="text-red-600">IA juegue a tu favor</span>
                     </h3>
                     <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">
-                        La IA ya define quién crece. En Inner Circle la aterrizamos como ventaja operativa: predicción, priorización y automatización conectadas a tu negocio.
+                        La IA ya define quién crece. Si tu competencia ya la usa y tú no, estás en desventaja. En Inner Circle la aterrizamos como ventaja, conectada a tu negocio, para que sigas competitivo en el mercado.
                     </p>
                     <ul class="space-y-3 mb-6">
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-sm"><strong>Predicción:</strong> demanda, riesgo, churn</span>
+                            <span class="text-sm"><strong>Demanda e inventario:</strong> Menos sobrantes y menos "se nos acabó".</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-sm"><strong>Priorización:</strong> foco en lo que deja</span>
+                            <span class="text-sm"><strong>Automatización:</strong> Menos trabajo manual y menos errores.</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-sm"><strong>Automatización:</strong> escala con control</span>
+                            <span class="text-sm"><strong>Riesgo y fraude:</strong> Menos pérdidas y devoluciones.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm"><strong>WhatsApp 24/7:</strong> Respondes siempre y no pierdes clientes.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm"><strong>Recomendaciones:</strong> Más ventas por cliente (ticket más alto).</span>
                         </li>
                     </ul>
                 </div>
                 <div class="border-t border-gray-200 dark:border-zinc-700 pt-4 space-y-3 mt-auto">
                     <a
                         href="/blog"
-                        class="flex items-center justify-between w-full bg-red-600 text-white px-5 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+                        class="flex items-center justify-between w-full bg-red-600 text-white px-5 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors min-h-[56px]"
                     >
-                        <span>Descubrir Soluciones con IA</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <span>Descubrir Soluciones con Inteligencia Artificial</span>
+                        <svg class="w-5 h-5 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
                     </a>
@@ -66,7 +78,7 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
                         href="https://wa.me/525559446719?text=Hola%2C%20quiero%20aplicar%20IA%20en%20mi%20negocio"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center justify-center w-full border-2 border-red-600 text-red-600 px-5 py-3 rounded-lg font-semibold hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                        class="flex items-center justify-center w-full border-2 border-red-600 text-red-600 px-5 py-3 rounded-lg font-semibold hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors min-h-[56px]"
                     >
                         Quiero aplicar IA en mi negocio
                     </a>
@@ -74,42 +86,54 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
             </div>
 
             {/* Tarjeta Ventas */}
-            <div class="flex flex-col rounded-xl border border-gray-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 p-6 sm:p-8 shadow-sm">
+            <div class="flex flex-col h-full rounded-xl border border-gray-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 p-6 sm:p-8 shadow-sm">
                 <div class="flex-grow">
                     <h3 class="font-serif text-xl sm:text-2xl font-semibold mb-4 leading-tight">
                         Aumenta tus ventas con un <span class="text-red-600">sistema comprobado</span>
                     </h3>
                     <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">
-                        Tus competidores ya venden con método; tú sigues improvisando. Nosotros implementamos un sistema para ganar consistencia, seguimiento y cierres.
+                        Quien ya opera con un sistema comprobado está un paso adelante. En Inner Circle no solo lo implementamos: lo construimos a la medida, codo a codo contigo.
                     </p>
                     <ul class="space-y-3 mb-6">
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-sm"><strong>Mínimas oportunidades perdidas:</strong> seguimiento automático y cadencias</span>
+                            <span class="text-sm"><strong>Incremento en ventas:</strong> más cierres por persuasión, no por descuento.</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-sm"><strong>Proceso replicable:</strong> cualquiera puede vender "como el mejor"</span>
+                            <span class="text-sm"><strong>Más recompra:</strong> clientes que regresan y te recomiendan.</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-sm"><strong>Rentabilidad protegida:</strong> pricing y descuentos con reglas</span>
+                            <span class="text-sm"><strong>Más utilidad:</strong> menos descuentos, mejor margen.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm"><strong>Mejor experiencia para el cliente:</strong> atención clara y rápida.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm"><strong>Menos dependencia de una sola persona:</strong> el proceso funciona siempre.</span>
                         </li>
                     </ul>
                 </div>
                 <div class="border-t border-gray-200 dark:border-zinc-700 pt-4 space-y-3 mt-auto">
                     <a
                         href="/blog"
-                        class="flex items-center justify-between w-full bg-red-600 text-white px-5 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+                        class="flex items-center justify-between w-full bg-red-600 text-white px-5 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors min-h-[56px]"
                     >
                         <span>Descubrir Soluciones de Ventas</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
                     </a>
@@ -117,7 +141,7 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
                         href="https://wa.me/525559446719?text=Hola%2C%20quiero%20aplicar%20un%20sistema%20de%20ventas%20en%20mi%20negocio"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center justify-center w-full border-2 border-red-600 text-red-600 px-5 py-3 rounded-lg font-semibold hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                        class="flex items-center justify-center w-full border-2 border-red-600 text-red-600 px-5 py-3 rounded-lg font-semibold hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors min-h-[56px]"
                     >
                         Quiero aplicarlo a mi negocio
                     </a>
