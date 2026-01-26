@@ -12,7 +12,7 @@
     function storeTheme(theme) {
         try {
             localStorage.setItem('theme', theme);
-        } catch {}
+        } catch { }
     }
 
     function getSystemTheme() {
