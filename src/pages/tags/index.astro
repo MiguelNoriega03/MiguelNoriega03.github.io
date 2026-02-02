@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import Subscribe from '../../components/Subscribe.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllTags, getPostsByTag, sortItemsByDateDesc } from '../../utils/data-utils';
 
@@ -13,22 +12,147 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
 ---
 
 <BaseLayout
-    title="Resources"
-    description="Explora contenido por tema: ventas, finanzas, automatización, IA y procesos."
+    title="Contáctanos"
+    description="¿Te gustaría más información? ¡Contáctanos!"
     showHeader={false}
 >
-    <h1 class="mb-4 font-serif text-2xl italic sm:mb-8 sm:text-4xl">Resources</h1>
-        <p class="mb-8 text-base sm:text-lg text-theme-foreground/90">Explora contenido por tema: ventas, finanzas, automatización, IA y procesos.</p>
-                <!-- Tags sugeridos en el lugar de los tags dinámicos -->
-        <div class="mb-12 flex flex-wrap gap-3">
-            <a href="/tags/sales-systems" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">Sales Systems</a>
-            <a href="/tags/crm-follow-up" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">CRM &amp; Follow-Up</a>
-            <a href="/tags/finance" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">Finance</a>
-            <a href="/tags/automation" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">Automation</a>
-            <a href="/tags/ai-for-smb" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">AI for SMB</a>
-            <a href="/tags/hiring" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">Hiring</a>
-            <a href="/tags/case-studies" class="inline-block rounded-full border border-main/30 bg-main/10 px-4 py-1 text-sm font-semibold hover:bg-main/20 transition">Case Studies</a>
+    <h1 class="mb-4 font-serif text-2xl font-bold sm:mb-8 sm:text-4xl text-center uppercase tracking-wide">¿Te gustaría más información de nuestras asesorías? ¡Contáctanos!</h1>
+    
+    {/* Formulario de Contacto */}
+    <section class="my-12 sm:my-16">
+        <div class="max-w-2xl mx-auto bg-white dark:bg-zinc-900 rounded-2xl shadow-lg p-8 sm:p-10">
+            <form id="contact-form" class="space-y-6">
+                {/* Nombre - Obligatorio */}
+                <div>
+                    <label for="nombre" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        Nombre <span class="text-red-600">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="nombre" 
+                        name="nombre" 
+                        required
+                        placeholder="Tu nombre completo"
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                    />
+                </div>
+
+                {/* Empresa - Opcional */}
+                <div>
+                    <label for="empresa" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        Empresa
+                    </label>
+                    <input 
+                        type="text" 
+                        id="empresa" 
+                        name="empresa"
+                        placeholder="Nombre de tu empresa (opcional)"
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                    />
+                </div>
+
+                {/* Correo electrónico - Obligatorio */}
+                <div>
+                    <label for="correo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        Correo electrónico <span class="text-red-600">*</span>
+                    </label>
+                    <input 
+                        type="email" 
+                        id="correo" 
+                        name="correo" 
+                        required
+                        placeholder="ejemplo@correo.com"
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                    />
+                </div>
+
+                {/* Solución de interés - Obligatorio */}
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        Solución de interés <span class="text-red-600">*</span>
+                    </label>
+                    <div class="space-y-3">
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input 
+                                type="radio" 
+                                name="solucion" 
+                                value="Soluciones con IA" 
+                                required
+                                class="w-5 h-5 text-red-600 border-gray-300 focus:ring-red-500"
+                            />
+                            <span class="text-gray-700 dark:text-gray-300">Soluciones con IA</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input 
+                                type="radio" 
+                                name="solucion" 
+                                value="Soluciones de venta"
+                                class="w-5 h-5 text-red-600 border-gray-300 focus:ring-red-500"
+                            />
+                            <span class="text-gray-700 dark:text-gray-300">Soluciones de venta</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input 
+                                type="radio" 
+                                name="solucion" 
+                                value="Ambas"
+                                class="w-5 h-5 text-red-600 border-gray-300 focus:ring-red-500"
+                            />
+                            <span class="text-gray-700 dark:text-gray-300">Ambas</span>
+                        </label>
+                    </div>
+                </div>
+
+                {/* Cuéntanos más - Opcional */}
+                <div>
+                    <label for="mas" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        Cuéntanos más
+                    </label>
+                    <textarea 
+                        id="mas" 
+                        name="mas"
+                        rows="4"
+                        placeholder="Cualquier información adicional que quieras compartir..."
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-red-500 focus:border-transparent transition resize-y"
+                    ></textarea>
+                </div>
+
+                {/* Botón Enviar */}
+                <button 
+                    type="submit"
+                    class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-lg shadow-md hover:shadow-lg transition-all text-lg"
+                >
+                    Enviar por WhatsApp
+                </button>
+            </form>
+            <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+                Al hacer clic, se abrirá WhatsApp con tu mensaje listo para enviar.
+            </p>
         </div>
-    {/* Aquí se eliminan los tags dinámicos, solo sugeridos */}
-    <Subscribe class="my-16 sm:my-24" />
+    </section>
 </BaseLayout>
+
+<script>
+    document.getElementById('contact-form')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const form = e.target as HTMLFormElement;
+        const formData = new FormData(form);
+        
+        const nombre = formData.get('nombre') || '';
+        const empresa = formData.get('empresa') || '';
+        const correo = formData.get('correo') || '';
+        const solucion = formData.get('solucion') || '';
+        const mas = formData.get('mas') || '';
+        
+        let mensaje = `*Nuevo contacto desde Inner Circle*%0A%0A`;
+        mensaje += `*Nombre:* ${nombre}%0A`;
+        if (empresa) mensaje += `*Empresa:* ${empresa}%0A`;
+        mensaje += `*Correo:* ${correo}%0A`;
+        mensaje += `*Solución de interés:* ${solucion}%0A`;
+        if (mas) mensaje += `%0A*Información adicional:*%0A${mas}`;
+        
+        const whatsappUrl = `https://wa.me/525559446719?text=${mensaje}`;
+        window.open(whatsappUrl, '_blank');
+    });
+</script>
