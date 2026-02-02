@@ -39,34 +39,22 @@ const siteConfig: SiteConfig = {
     ],
     footerNavLinks: [
         {
-            text: 'About',
-            href: '/about'
+            text: '¿Quiénes Somos?',
+            href: '/quienes-somos'
         },
         {
-            text: 'Contact',
-            href: '/contact'
+            text: 'Contáctanos',
+            href: '/tags'
         },
         {
-            text: 'Terms',
+            text: 'Términos',
             href: '/terms'
-        },
-        {
-            text: 'Download theme',
-            href: 'https://github.com/JustGoodUI/dante-astro-theme'
         }
     ],
     socialLinks: [
         {
-            text: 'Dribbble',
-            href: 'https://dribbble.com/'
-        },
-        {
-            text: 'Instagram',
-            href: 'https://instagram.com/'
-        },
-        {
-            text: 'X/Twitter',
-            href: 'https://twitter.com/'
+            text: 'LinkedIn',
+            href: 'https://linkedin.com/company/innercircle-mx'
         }
     ],
     hero: {
@@ -88,9 +76,9 @@ const siteConfig: SiteConfig = {
         ]
     },
     subscribe: {
-        enabled: true,
-        title: 'Subscribe to Dante Newsletter',
-        text: 'One update per week. All the latest posts directly in your inbox.',
+        enabled: false,
+        title: '',
+        text: '',
         form: {
             action: '#'
         }
