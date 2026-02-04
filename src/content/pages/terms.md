@@ -5,8 +5,6 @@ seo:
   description: Conoce los términos y condiciones de uso del sitio web innercircle.mx, así como nuestro aviso de privacidad.
 ---
 
-## TÉRMINOS DE SERVICIO
-
 **Última actualización: 4 de febrero de 2026**
 
 Estos Términos regulan el acceso y uso de innercircle.mx (el "Sitio Web") y los servicios relacionados ofrecidos por Miguel Ángel Noriega Bedolla y César Augusto Cid ("nosotros", "nos" o "nuestro"). Por favor, lee estos Términos cuidadosamente antes de utilizar el Sitio Web.
@@ -71,7 +69,7 @@ Para dudas sobre estos Términos, puedes contactarnos en:
 
 ## AVISO DE PRIVACIDAD INTEGRAL
 
-**Última actualización: 11 de enero de 2024**
+**Última actualización: 4 de febrero de 2026**
 
 En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y su Reglamento, se emite el presente Aviso de Privacidad Integral.
 
@@ -153,6 +151,6 @@ Dudas o solicitudes:
 
 ---
 
-## AVISO DE PRIVACIDAD (CORTO PARA FORMULARIOS)
+## AVISO DE PRIVACIDAD 
 
 Los responsables del tratamiento son Miguel Ángel Noriega Bedolla y César Augusto Cid. Tus datos se usarán para contactarte y dar seguimiento a tu solicitud y, en su caso, enviarte información sobre servicios. Puedes ejercer derechos ARCO o limitar el uso de tus datos escribiendo a MiguelNoriega@innercircle.mx y CesarCid@innercircle.mx. Consulta el Aviso de Privacidad Integral en innercircle.mx.
