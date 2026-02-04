@@ -140,6 +140,9 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
     if (solucionParam === 'ia') {
         const radioIA = document.querySelector('input[name="solucion"][value="Soluciones con IA"]') as HTMLInputElement;
         if (radioIA) radioIA.checked = true;
+    } else if (solucionParam === 'ventas') {
+        const radioVentas = document.querySelector('input[name="solucion"][value="Soluciones de venta"]') as HTMLInputElement;
+        if (radioVentas) radioVentas.checked = true;
     }
 
     document.getElementById('contact-form')?.addEventListener('submit', function(e) {
