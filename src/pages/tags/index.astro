@@ -133,6 +133,15 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
 </BaseLayout>
 
 <script>
+    // Preseleccionar opción basada en parámetro URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const solucionParam = urlParams.get('solucion');
+    
+    if (solucionParam === 'ia') {
+        const radioIA = document.querySelector('input[name="solucion"][value="Soluciones con IA"]') as HTMLInputElement;
+        if (radioIA) radioIA.checked = true;
+    }
+
     document.getElementById('contact-form')?.addEventListener('submit', function(e) {
         e.preventDefault();
         
