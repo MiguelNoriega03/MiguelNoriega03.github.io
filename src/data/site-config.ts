@@ -54,7 +54,7 @@ const siteConfig: SiteConfig = {
     socialLinks: [
         {
             text: 'LinkedIn',
-            href: 'https://linkedin.com/company/innercircle-mx'
+            href: 'https://www.linkedin.com/company/innercirclemexico/'
         }
     ],
     hero: {
