@@ -9,7 +9,7 @@ seo:
 
 **Última actualización: 4 de febrero de 2026**
 
-Estos Términos de Servicio ("Términos") rigen tu acceso y uso de innercircle.mx (el "Sitio Web") y cualquier servicio relacionado ofrecido por Miguel Ángel Noriega Bedolla ("nosotros", "nos" o "nuestro"). Por favor, lee estos Términos cuidadosamente antes de utilizar el Sitio Web.
+Estos Términos regulan el acceso y uso de innercircle.mx (el "Sitio Web") y los servicios relacionados ofrecidos por Miguel Ángel Noriega Bedolla y César Augusto Cid ("nosotros", "nos" o "nuestro"). Por favor, lee estos Términos cuidadosamente antes de utilizar el Sitio Web.
 
 **1. Aceptación de los Términos**
 
@@ -75,9 +75,9 @@ Para dudas sobre estos Términos, puedes contactarnos en:
 
 En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y su Reglamento, se emite el presente Aviso de Privacidad Integral.
 
-**1. Responsable del tratamiento de datos personales**
+**1. Responsables del tratamiento de datos personales**
 
-El responsable del tratamiento de tus datos personales es Miguel Ángel Noriega Bedolla (el "Responsable").
+Los responsables del tratamiento de tus datos personales son Miguel Ángel Noriega Bedolla y César Augusto Cid (en lo sucesivo, los "Responsables").
 
 Correo de contacto: MiguelNoriega@innercircle.mx y CesarCid@innercircle.mx
 
@@ -155,4 +155,4 @@ Dudas o solicitudes:
 
 ## AVISO DE PRIVACIDAD (CORTO PARA FORMULARIOS)
 
-El Responsable del tratamiento es Miguel Ángel Noriega Bedolla. Tus datos se usarán para contactarte y dar seguimiento a tu solicitud y, en su caso, enviarte información sobre servicios. Puedes ejercer derechos ARCO o limitar el uso de tus datos escribiendo a MiguelNoriega@innercircle.mx y CesarCid@innercircle.mx. Consulta el Aviso de Privacidad Integral en innercircle.mx.
+Los responsables del tratamiento son Miguel Ángel Noriega Bedolla y César Augusto Cid. Tus datos se usarán para contactarte y dar seguimiento a tu solicitud y, en su caso, enviarte información sobre servicios. Puedes ejercer derechos ARCO o limitar el uso de tus datos escribiendo a MiguelNoriega@innercircle.mx y CesarCid@innercircle.mx. Consulta el Aviso de Privacidad Integral en innercircle.mx.
