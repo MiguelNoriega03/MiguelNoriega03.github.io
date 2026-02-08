@@ -33,7 +33,7 @@ const siteConfig: SiteConfig = {
                 },
                 {
                     text: 'Soluciones Comerciales',
-                    href: '/projects'
+                    href: '/soluciones-comerciales'
                 }
             ]
         },
