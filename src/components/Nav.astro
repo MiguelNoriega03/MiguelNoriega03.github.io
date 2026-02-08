@@ -22,16 +22,42 @@ const navLinks = siteConfig.headerNavLinks ?? [];
                 </button>
                 <ul
                     id="menu-items"
-                    class="menu max-md:bg-main max-md:border-main flex gap-6 max-md:absolute max-md:-top-2.5 max-md:-left-2.5 max-md:z-20 max-md:max-w-64 max-md:flex-col max-md:gap-1 max-md:border max-md:border-dashed max-md:px-3 max-md:pt-16 max-md:pb-10"
+                    class="menu max-md:bg-main max-md:border-main flex items-baseline gap-6 max-md:absolute max-md:-top-2.5 max-md:-left-2.5 max-md:z-20 max-md:max-w-64 max-md:flex-col max-md:items-start max-md:gap-1 max-md:border max-md:border-dashed max-md:px-3 max-md:pt-16 max-md:pb-10"
                 >
                     {navLinks.map((link) => (
-                        <li class="py-1">
-                            <NavLink
-                                class="text-main font-serif text-xl hover:underline hover:decoration-1 hover:underline-offset-2 md:text-base"
-                                href={link.href}
-                            >
-                                {link.text}
-                            </NavLink>
+                        <li class="py-1 relative">
+                            {link.children ? (
+                                <div class="dropdown-container">
+                                    <button
+                                        class="dropdown-toggle text-main font-serif text-xl hover:underline hover:decoration-1 hover:underline-offset-2 md:text-base flex items-baseline gap-1 cursor-pointer"
+                                        aria-expanded="false"
+                                    >
+                                        {link.text}
+                                        <svg class="dropdown-arrow w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <ul class="dropdown-menu bg-main border-main absolute left-0 top-full mt-1 min-w-48 border border-dashed py-2 opacity-0 invisible transition-all duration-200 z-50 max-md:relative max-md:mt-0 max-md:border-0 max-md:py-0 max-md:pl-4">
+                                        {link.children.map((child) => (
+                                            <li class="py-1">
+                                                <NavLink
+                                                    class="text-main font-serif text-lg hover:underline hover:decoration-1 hover:underline-offset-2 md:text-sm block px-3 py-1"
+                                                    href={child.href}
+                                                >
+                                                    {child.text}
+                                                </NavLink>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ) : (
+                                <NavLink
+                                    class="text-main font-serif text-xl hover:underline hover:decoration-1 hover:underline-offset-2 md:text-base"
+                                    href={link.href}
+                                >
+                                    {link.text}
+                                </NavLink>
+                            )}
                         </li>
                     ))}
                 </ul>
@@ -89,6 +115,24 @@ const navLinks = siteConfig.headerNavLinks ?? [];
         .menu-toggle.is-active .menu-toggle-icon:after {
             @apply -rotate-45;
         }
+        /* Mobile dropdown - always visible when parent menu is open */
+        .dropdown-menu {
+            @apply visible opacity-100 static;
+        }
+        .dropdown-menu.is-open {
+            @apply visible opacity-100;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .dropdown-container:hover .dropdown-menu,
+        .dropdown-menu.is-open {
+            @apply visible opacity-100;
+        }
+        .dropdown-container:hover .dropdown-arrow,
+        .dropdown-toggle.is-active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
     }
 </style>
 
@@ -104,6 +148,46 @@ const navLinks = siteConfig.headerNavLinks ?? [];
             menu?.classList.toggle('is-visible');
         });
     }
+
+    function dropdownToggle() {
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+        dropdownToggles.forEach((toggle) => {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const dropdown = toggle.nextElementSibling;
+                const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                
+                // Close other dropdowns
+                dropdownToggles.forEach((otherToggle) => {
+                    if (otherToggle !== toggle) {
+                        otherToggle.setAttribute('aria-expanded', 'false');
+                        otherToggle.classList.remove('is-active');
+                        otherToggle.nextElementSibling?.classList.remove('is-open');
+                    }
+                });
+                
+                toggle.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+                toggle.classList.toggle('is-active');
+                dropdown?.classList.toggle('is-open');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown-container')) {
+                dropdownToggles.forEach((toggle) => {
+                    toggle.setAttribute('aria-expanded', 'false');
+                    toggle.classList.remove('is-active');
+                    toggle.nextElementSibling?.classList.remove('is-open');
+                });
+            }
+        });
+    }
+
     menuToggle();
-    document.addEventListener('astro:after-swap', menuToggle);
+    dropdownToggle();
+    document.addEventListener('astro:after-swap', () => {
+        menuToggle();
+        dropdownToggle();
+    });
 </script>

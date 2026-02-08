@@ -21,19 +21,28 @@ const siteConfig: SiteConfig = {
             href: '/'
         },
         {
-            text: 'Casos de Exito', // antes Projects
+            text: 'Casos de Exito',
             href: '/projects'
         },
         {
-            text: 'Servicios', // antes Blog/Insights
-            href: '/blog'
+            text: 'Soluciones',
+            children: [
+                {
+                    text: 'Soluciones IA',
+                    href: '/blog'
+                },
+                {
+                    text: 'Soluciones Comerciales',
+                    href: '/projects'
+                }
+            ]
         },
         {
             text: '¿Quiénes Somos?',
             href: '/quienes-somos'
         },
         {
-            text: 'Contáctanos', // antes Resources/Tags
+            text: 'Contáctanos',
             href: '/tags'
         }
     ],

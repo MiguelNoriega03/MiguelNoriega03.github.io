@@ -9,6 +9,12 @@ export type Link = {
     href: string;
 };
 
+export type NavLink = {
+    text: string;
+    href?: string;
+    children?: Link[];
+};
+
 export type Hero = {
     title?: string;
     text?: string;
@@ -38,7 +44,7 @@ export type SiteConfig = {
     subtitle?: string;
     description: string;
     image?: ImageInput;
-    headerNavLinks?: Link[];
+    headerNavLinks?: NavLink[];
     footerNavLinks?: Link[];
     socialLinks?: Link[];
     hero?: Hero;
