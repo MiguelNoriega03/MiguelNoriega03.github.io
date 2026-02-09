@@ -29,7 +29,7 @@ const siteConfig: SiteConfig = {
             children: [
                 {
                     text: 'Soluciones IA',
-                    href: '/blog'
+                    href: '/soluciones-ia'
                 },
                 {
                     text: 'Soluciones Comerciales',
