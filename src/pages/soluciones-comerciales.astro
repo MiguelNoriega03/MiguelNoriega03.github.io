@@ -467,236 +467,298 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 Detalle de los módulos
             </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="modulos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 
                 <!-- Módulo 1: Diagnóstico Comercial + Plan 30/60/90 -->
-                <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                <details data-column="1" class="group bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <summary class="flex items-center gap-3 p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors list-none">
+                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
                             <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                             </svg>
                         </div>
-                        <h3 class="font-serif text-base font-medium text-gray-900 dark:text-white leading-tight">
+                        <h3 class="font-serif text-sm font-medium text-gray-900 dark:text-white leading-tight flex-grow">
                             Diagnóstico Comercial + Plan 30/60/90
                         </h3>
+                        <svg class="w-5 h-5 text-red-600 flex-shrink-0 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-0">
+                        <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                            Identificar fugas reales, priorizar quick wins y tener un roadmap claro para ventas aseguradas.
+                        </p>
+                        <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Incluye:</strong> inmersión estratégica, radiografía competitiva, mapeo del proceso actual, detección de fugas y cuellos de botella</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Entregables:</strong> funnel visual con fugas marcadas + prioridades por impacto + plan 30/60/90 con responsables y métricas</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
+                            <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 3-4 semanas | 4-5 workshops</span>
+                        </div>
                     </div>
-                    <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                        Identificar fugas reales, priorizar quick wins y tener un roadmap claro para ventas aseguradas.
-                    </p>
-                    <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Incluye:</strong> inmersión estratégica, radiografía competitiva, mapeo del proceso actual, detección de fugas y cuellos de botella</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Entregables:</strong> funnel visual con fugas marcadas + prioridades por impacto + plan 30/60/90 con responsables y métricas</span>
-                        </li>
-                    </ul>
-                    <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
-                        <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 3-4 semanas | 4-5 workshops</span>
-                    </div>
-                </div>
+                </details>
                 
                 <!-- Módulo 2: Playbook de Conversión -->
-                <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                <details data-column="2" class="group bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <summary class="flex items-center gap-3 p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors list-none">
+                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
                             <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                             </svg>
                         </div>
-                        <h3 class="font-serif text-base font-medium text-gray-900 dark:text-white leading-tight">
+                        <h3 class="font-serif text-sm font-medium text-gray-900 dark:text-white leading-tight flex-grow">
                             Playbook de Conversión
                         </h3>
+                        <svg class="w-5 h-5 text-red-600 flex-shrink-0 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-0">
+                        <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                            Que todo el equipo cierre más y mejor, sin improvisación, por cualquier canal.
+                        </p>
+                        <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Incluye:</strong> guiones por canal y momentos críticos</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Entregables:</strong> playbook editable + cue cards + librería 50+ objeciones + role plays grabados</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
+                            <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 3-4 semanas | 4-6 workshops</span>
+                        </div>
                     </div>
-                    <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                        Que todo el equipo cierre más y mejor, sin improvisación, por cualquier canal.
-                    </p>
-                    <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Incluye:</strong> guiones por canal y momentos críticos</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Entregables:</strong> playbook editable + cue cards + librería 50+ objeciones + role plays grabados</span>
-                        </li>
-                    </ul>
-                    <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
-                        <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 3-4 semanas | 4-6 workshops</span>
-                    </div>
-                </div>
+                </details>
                 
                 <!-- Módulo 3: Proceso Omnicanal -->
-                <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                <details data-column="3" class="group bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <summary class="flex items-center gap-3 p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors list-none">
+                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
                             <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
                             </svg>
                         </div>
-                        <h3 class="font-serif text-base font-medium text-gray-900 dark:text-white leading-tight">
+                        <h3 class="font-serif text-sm font-medium text-gray-900 dark:text-white leading-tight flex-grow">
                             Proceso Omnicanal
                         </h3>
+                        <svg class="w-5 h-5 text-red-600 flex-shrink-0 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-0">
+                        <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                            Trazabilidad completa del pipeline y seguimiento consistente para que ninguna oportunidad se pierda.
+                        </p>
+                        <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Incluye:</strong> etapas claras, responsables, reglas de avance, SLAs por canal y cadencias automatizables</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Entregables:</strong> pipeline visual + SOPs documentados + cadencias día 0/2/5/10/17/30 + templates por etapa</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
+                            <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 3-4 semanas | 4 workshops</span>
+                        </div>
                     </div>
-                    <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                        Trazabilidad completa del pipeline y seguimiento consistente para que ninguna oportunidad se pierda.
-                    </p>
-                    <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Incluye:</strong> etapas claras, responsables, reglas de avance, SLAs por canal y cadencias automatizables</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Entregables:</strong> pipeline visual + SOPs documentados + cadencias día 0/2/5/10/17/30 + templates por etapa</span>
-                        </li>
-                    </ul>
-                    <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
-                        <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 3-4 semanas | 4 workshops</span>
-                    </div>
-                </div>
+                </details>
                 
                 <!-- Módulo 4: Implementación y Adopción -->
-                <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                <details data-column="1" class="group bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <summary class="flex items-center gap-3 p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors list-none">
+                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
                             <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                             </svg>
                         </div>
-                        <h3 class="font-serif text-base font-medium text-gray-900 dark:text-white leading-tight">
+                        <h3 class="font-serif text-sm font-medium text-gray-900 dark:text-white leading-tight flex-grow">
                             Implementación y Adopción
                         </h3>
+                        <svg class="w-5 h-5 text-red-600 flex-shrink-0 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-0">
+                        <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                            Que el sistema se ejecute en el día a día, no se quede en un documento.
+                        </p>
+                        <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Incluye:</strong> role plays reales, simulaciones, entrenamiento en negociación y coaching directo al líder</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Entregables:</strong> rúbrica de evaluación + checklist diario + estándar mínimo por vendedor + certificado interno</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
+                            <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 4-6 semanas | 6-8 workshops</span>
+                        </div>
                     </div>
-                    <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                        Que el sistema se ejecute en el día a día, no se quede en un documento.
-                    </p>
-                    <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Incluye:</strong> role plays reales, simulaciones, entrenamiento en negociación y coaching directo al líder</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Entregables:</strong> rúbrica de evaluación + checklist diario + estándar mínimo por vendedor + certificado interno</span>
-                        </li>
-                    </ul>
-                    <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
-                        <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 4-6 semanas | 6-8 workshops</span>
-                    </div>
-                </div>
+                </details>
                 
                 <!-- Módulo 5: Incentivos y Comisiones -->
-                <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                <details data-column="2" class="group bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <summary class="flex items-center gap-3 p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors list-none">
+                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
                             <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
-                        <h3 class="font-serif text-base font-medium text-gray-900 dark:text-white leading-tight">
+                        <h3 class="font-serif text-sm font-medium text-gray-900 dark:text-white leading-tight flex-grow">
                             Incentivos y Comisiones con Guardrails
                         </h3>
+                        <svg class="w-5 h-5 text-red-600 flex-shrink-0 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-0">
+                        <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                            Crecer ventas sin destruir margen ni incentivar descuentos excesivos.
+                        </p>
+                        <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Incluye:</strong> rediseño completo del esquema para premiar cierres rentables</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Entregables:</strong> modelo documentado + simulación de 5 escenarios reales + reglas anti-descuentos + criterios de excepción</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
+                            <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 2-3 semanas | 3 workshops</span>
+                        </div>
                     </div>
-                    <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                        Crecer ventas sin destruir margen ni incentivar descuentos excesivos.
-                    </p>
-                    <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Incluye:</strong> rediseño completo del esquema para premiar cierres rentables</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Entregables:</strong> modelo documentado + simulación de 5 escenarios reales + reglas anti-descuentos + criterios de excepción</span>
-                        </li>
-                    </ul>
-                    <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
-                        <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 2-3 semanas | 3 workshops</span>
-                    </div>
-                </div>
+                </details>
                 
                 <!-- Módulo 6: Sistema de Cotización y Cobro -->
-                <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                <details data-column="3" class="group bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <summary class="flex items-center gap-3 p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors list-none">
+                        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
                             <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
                             </svg>
                         </div>
-                        <h3 class="font-serif text-base font-medium text-gray-900 dark:text-white leading-tight">
+                        <h3 class="font-serif text-sm font-medium text-gray-900 dark:text-white leading-tight flex-grow">
                             Sistema de Cotización y Cobro
                         </h3>
+                        <svg class="w-5 h-5 text-red-600 flex-shrink-0 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-0">
+                        <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                            Cotizar más rápido, con precisión, protección de margen y trazabilidad completa.
+                        </p>
+                        <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Incluye:</strong> arquitectura comercial + herramienta operativa según tu madurez actual</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Camino CPQ Excel:</strong> implementación rápida, validaciones automáticas, control de versiones y permisos (Google Drive o SharePoint)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Camino CRM:</strong> optimizamos el tuyo o seleccionamos/configuramos el mejor (pipeline, campos clave, reportes, automatizaciones)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold">•</span>
+                                <span><strong>Entregables extra:</strong> plantillas de propuesta comercial + seguimiento de cobros</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
+                            <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 4-6 semanas | 5-7 workshops</span>
+                        </div>
                     </div>
-                    <p class="text-xs text-red-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                        Cotizar más rápido, con precisión, protección de margen y trazabilidad completa.
-                    </p>
-                    <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Incluye:</strong> arquitectura comercial + herramienta operativa según tu madurez actual</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Camino CPQ Excel:</strong> implementación rápida, validaciones automáticas, control de versiones y permisos (Google Drive o SharePoint)</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Camino CRM:</strong> optimizamos el tuyo o seleccionamos/configuramos el mejor (pipeline, campos clave, reportes, automatizaciones)</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-600 font-bold">•</span>
-                            <span><strong>Entregables extra:</strong> plantillas de propuesta comercial + seguimiento de cobros</span>
-                        </li>
-                    </ul>
-                    <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
-                        <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 4-6 semanas | 5-7 workshops</span>
-                    </div>
-                </div>
+                </details>
                 
                 <!-- Módulo 7: Motor de Ventas Recurrentes -->
-                <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow md:col-span-2 lg:col-span-1 lg:col-start-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                <details data-column="2" class="group bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden md:col-span-2 lg:col-span-1 lg:col-start-2">
+                    <summary class="flex items-center gap-3 p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors list-none">
+                        <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center flex-shrink-0">
                             <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                             </svg>
                         </div>
-                        <h3 class="font-serif text-base font-medium text-gray-900 dark:text-white leading-tight">
+                        <h3 class="font-serif text-sm font-medium text-gray-900 dark:text-white leading-tight flex-grow">
                             Motor de Ventas Recurrentes
                         </h3>
+                        <svg class="w-5 h-5 text-amber-600 flex-shrink-0 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-0">
+                        <p class="text-xs text-amber-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                            Generar ventas aseguradas desde tu base existente sin depender solo de leads nuevos.
+                        </p>
+                        <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-amber-600 font-bold">•</span>
+                                <span><strong>Incluye:</strong> segmentación por valor, recontacto a fríos, programa de referidos y estrategia de recompra/upsell/cross-sell</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-amber-600 font-bold">•</span>
+                                <span><strong>Entregables:</strong> reglas de segmentación + cadencias de 5-7 mensajes probados + sistema completo de referidos con scripts, incentivos y tracking</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
+                            <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 3-4 semanas | 4 workshops</span>
+                        </div>
                     </div>
-                    <p class="text-xs text-amber-600 font-semibold uppercase tracking-wide mb-2">Para qué sirve</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                        Generar ventas aseguradas desde tu base existente sin depender solo de leads nuevos.
-                    </p>
-                    <ul class="space-y-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-amber-600 font-bold">•</span>
-                            <span><strong>Incluye:</strong> segmentación por valor, recontacto a fríos, programa de referidos y estrategia de recompra/upsell/cross-sell</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-amber-600 font-bold">•</span>
-                            <span><strong>Entregables:</strong> reglas de segmentación + cadencias de 5-7 mensajes probados + sistema completo de referidos con scripts, incentivos y tracking</span>
-                        </li>
-                    </ul>
-                    <div class="pt-3 border-t border-gray-100 dark:border-zinc-800">
-                        <span class="text-[11px] text-gray-500 dark:text-gray-500">⏱ 3-4 semanas | 4 workshops</span>
-                    </div>
-                </div>
+                </details>
                 
             </div>
         </div>
     </section>
+
+    <script>
+        // Sincronizar módulos de la misma columna en desktop (lg: >= 1024px)
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('modulos-grid');
+            if (!grid) return;
+            
+            const modules = grid.querySelectorAll('details[data-column]');
+            
+            modules.forEach(module => {
+                module.addEventListener('toggle', (e) => {
+                    // Solo sincronizar en desktop (lg breakpoint = 1024px)
+                    if (window.innerWidth < 1024) return;
+                    
+                    const column = module.dataset.column;
+                    const isOpen = module.open;
+                    
+                    // Sincronizar otros módulos de la misma columna
+                    modules.forEach(other => {
+                        if (other !== module && other.dataset.column === column) {
+                            other.open = isOpen;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 
     <!-- Sección: Testimonios -->
     <section class="mb-16 sm:mb-24">
