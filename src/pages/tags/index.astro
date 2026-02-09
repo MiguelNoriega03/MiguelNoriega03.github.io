@@ -151,20 +151,21 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         const form = e.target as HTMLFormElement;
         const formData = new FormData(form);
         
-        const nombre = formData.get('nombre') || '';
-        const empresa = formData.get('empresa') || '';
-        const correo = formData.get('correo') || '';
-        const solucion = formData.get('solucion') || '';
-        const mas = formData.get('mas') || '';
+        const nombre = (formData.get('nombre') as string) || '';
+        const empresa = (formData.get('empresa') as string) || '';
+        const correo = (formData.get('correo') as string) || '';
+        const solucion = (formData.get('solucion') as string) || '';
+        const mas = (formData.get('mas') as string) || '';
         
-        let mensaje = `*Nuevo contacto desde Inner Circle*%0A%0A`;
-        mensaje += `*Nombre:* ${nombre}%0A`;
-        if (empresa) mensaje += `*Empresa:* ${empresa}%0A`;
-        mensaje += `*Correo:* ${correo}%0A`;
-        mensaje += `*Solución de interés:* ${solucion}%0A`;
-        if (mas) mensaje += `%0A*Información adicional:*%0A${mas}`;
+        let mensaje = `*Nuevo contacto desde Inner Circle*\n\n`;
+        mensaje += `*Nombre:* ${nombre}\n`;
+        if (empresa) mensaje += `*Empresa:* ${empresa}\n`;
+        mensaje += `*Correo:* ${correo}\n`;
+        mensaje += `*Solución de interés:* ${solucion}\n`;
+        if (mas) mensaje += `\n*Información adicional:*\n${mas}`;
         
-        const whatsappUrl = `https://wa.me/525591659829?text=${mensaje}`;
+        const encodedMsg = encodeURIComponent(mensaje);
+        const whatsappUrl = `https://wa.me/525591659829?text=${encodedMsg}`;
         window.open(whatsappUrl, '_blank');
     });
 </script>
