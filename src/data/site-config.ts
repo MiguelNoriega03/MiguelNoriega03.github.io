@@ -21,7 +21,7 @@ const siteConfig: SiteConfig = {
             href: '/'
         },
         {
-            text: 'Casos de Exito',
+            text: 'Casos de Éxito',
             href: '/projects'
         },
         {

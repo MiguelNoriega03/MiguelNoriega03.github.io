@@ -18,15 +18,18 @@ const { page } = Astro.props;
 const portfolio = page.data;
 ---
 
-<BaseLayout title="Portfolio" description="Explore a diverse portfolio showcasing my passion and expertise" showHeader={false}>
-    <h1 class="mb-4 font-serif text-2xl leading-tight italic sm:mb-8 sm:text-4xl">Results</h1>
-    <p class="mb-12 text-base sm:text-lg text-theme-foreground/90">Casos reales donde implementamos estrategia, sistema y ejecución. Cada etapa está documentada como un case independiente.</p>
-        {/* Mostrar Tendenzza en orden 1,2,3 y luego el resto */}
+<BaseLayout title="Casos de Éxito" description="Casos reales donde implementamos estrategia, sistema y ejecución" showHeader={false}>
+    <h1 class="mb-4 font-serif text-3xl leading-tight font-medium sm:mb-8 sm:text-5xl">Casos de Éxito</h1>
+    <p class="mb-12 text-base sm:text-lg text-gray-600 dark:text-gray-400">Casos reales donde implementamos estrategia, sistema y ejecución. Cada etapa está documentada como un caso independiente.</p>
+    
+    <div class="grid gap-8 md:grid-cols-1">
         {[
             ...portfolio.filter(p => p.id === 'tendenzza-stage-1'),
             ...portfolio.filter(p => p.id === 'tendenzza-stage-2'),
             ...portfolio.filter(p => p.id === 'tendenzza-stage-3'),
             ...portfolio.filter(p => !['tendenzza-stage-1','tendenzza-stage-2','tendenzza-stage-3'].includes(p.id))
-        ].map((project) => <ProjectPreview project={project} class="mb-10 sm:mb-12" />)}
+        ].map((project) => <ProjectPreview project={project} class="rounded-xl border border-gray-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 p-6 shadow-sm hover:shadow-md transition-shadow" />)}
+    </div>
+    
     <Pagination page={page} class="my-16 sm:my-24" />
 </BaseLayout>
