@@ -6,55 +6,329 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="¿Quiénes Somos?" description="Conoce más sobre Inner Circle y nuestro equipo" showHeader={false}>
-    <div class="mb-16 sm:mb-24">
-        <h2 class="mb-12 font-serif text-3xl font-bold sm:mb-16 sm:text-5xl">¿Quiénes somos?</h2>
-        
-        <!-- Dos columnas: Miguel y Cesar -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-10">
-            <!-- Columna izquierda: Miguel Ángel -->
-            <div class="grow">
-                <h3 class="font-serif text-xl leading-tight font-medium sm:text-2xl mb-3">
-                    Miguel Ángel Noriega
-                </h3>
-                <Image 
-                    src={HeroMiguel} 
-                    alt="Miguel Ángel Noriega"
-                    class="w-full rounded-lg mb-4"
-                    width={1200}
-                    height={1200}
-                    quality={95}
-                />
-                <div class="text-sm leading-normal text-justify">
-                  Lidera iniciativas de análisis de datos e inteligencia artificial aplicadas a estrategias comerciales. Cuenta con experiencia práctica en ventas y en el diseño e implementación de sistemas comerciales, habiendo asesorado a diversas organizaciones en la optimización de sus procesos de negocio mediante soluciones tecnológicas avanzadas. Su dominio en la aplicación de modelos de Machine y Deep Learning le ha permitido impulsar transformaciones digitales enfocadas en mejorar la eficiencia y el crecimiento de los clientes, siempre con un enfoque riguroso y orientado a resultados. Miguel es Ingeniero Industrial y de Sistemas egresado del Tecnológico de Monterrey, con especialización en Inteligencia Artificial (IA) y aprendizaje automático, formación que sustenta su enfoque técnico y visión estratégica.
-                </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- HERO SECTION                                 -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="mb-16 sm:mb-24 text-center">
+        <div class="max-w-4xl mx-auto">
+            <!-- Icono decorativo -->
+            <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-red-600 rounded-2xl mb-8 shadow-lg">
+                <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
             </div>
 
-            <!-- Columna derecha: Cesar Augusto -->
-            <div class="grow">
-                <h3 class="font-serif text-xl leading-tight font-medium sm:text-2xl mb-3">
-                    César Augusto Cid
-                </h3>
-                <Image 
-                    src={HeroCesar} 
-                    alt="César Augusto Cid"
-                    class="w-full rounded-lg mb-4"
-                    width={1200}
-                    height={1200}
-                    quality={95}
-                />
-                <div class="text-sm leading-normal text-justify">
-Lidera iniciativas de finanzas corporativas y rentabilidad aplicadas a estrategias comerciales. Cuenta con experiencia práctica en ventas y en el diseño e implementación de sistemas comerciales, habiendo acompañado a diversas organizaciones en la mejora de su desempeño comercial mediante métricas y criterios financieros de decisión. Su dominio en pricing, estructura de márgenes y flujo de efectivo le ha permitido impulsar crecimiento sostenible, alineando el desempeño comercial con objetivos de rentabilidad, siempre con un enfoque riguroso y orientado a resultados. César es Licenciado en Finanzas egresado del Tecnológico de Monterrey, con especialización en finanzas corporativas, formación que sustenta su visión financiera y estratégica.            </div>
+            <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mb-6 sm:mb-8 leading-tight">
+                Estrategia + Ejecución = <span class="text-red-600">Resultados</span>
+            </h1>
+
+            <p class="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Inner Circle es una consultora para crecer sin improvisación. Nos involucramos a fondo y convertimos estrategia en ejecución. Combinamos ingeniería e IA aplicada con finanzas, rentabilidad y experiencia real en ventas.
+            </p>
+
+            <!-- Badges de valor -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <span class="inline-flex items-center gap-1.5 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-full px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm">
+                    <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    Implementación end-to-end
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-full px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm">
+                    <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    Enfoque en resultados
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-full px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm">
+                    <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    Trabajo bajo NDA
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SEPARADOR VISUAL                             -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="flex items-center gap-4 mb-16 sm:mb-24">
+        <div class="flex-grow h-px bg-gray-200 dark:bg-zinc-700"></div>
+        <span class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">Socios Fundadores</span>
+        <div class="flex-grow h-px bg-gray-200 dark:bg-zinc-700"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- MIGUEL ÁNGEL — FULL-WIDTH CARD               -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="mb-12 sm:mb-16">
+        <div class="rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-sm overflow-hidden">
+            <!-- Layout imagen + contenido -->
+            <div class="flex flex-col lg:flex-row">
+                <!-- Foto -->
+                <div class="lg:w-2/5 relative bg-white dark:bg-zinc-900 flex items-center justify-center">
+                    <Image
+                        src={HeroMiguel}
+                        alt="Miguel Ángel Noriega"
+                        class="w-full h-auto lg:h-full lg:object-contain lg:object-center"
+                        width={800}
+                        height={1000}
+                        quality={95}
+                    />
+                </div>
+
+                <!-- Info -->
+                <div class="lg:w-3/5 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+                    <!-- Badge de rol -->
+                    <div class="mb-4">
+                        <span class="inline-flex items-center gap-1.5 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            Socio Fundador
+                        </span>
+                    </div>
+
+                    <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl font-medium mb-2 leading-tight">
+                        Miguel Ángel Noriega
+                    </h2>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-5 font-medium">
+                        Ingeniería IA · Estrategia Comercial · Data Science
+                    </p>
+
+                    <!-- Bio texto -->
+                    <p class="text-sm sm:text-base leading-relaxed text-gray-600 dark:text-gray-400 mb-6 text-justify">
+                        Lidera iniciativas de análisis de datos e inteligencia artificial aplicadas a estrategias comerciales. Cuenta con experiencia práctica en ventas y en el diseño e implementación de sistemas comerciales, habiendo asesorado a diversas organizaciones en la optimización de sus procesos de negocio mediante soluciones tecnológicas avanzadas. Su dominio en la aplicación de modelos de Machine y Deep Learning le ha permitido impulsar transformaciones digitales enfocadas en mejorar la eficiencia y el crecimiento de los clientes, siempre con un enfoque riguroso y orientado a resultados.
+                    </p>
+
+                    <!-- Áreas de expertise - pills -->
+                    <div class="mb-6">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-3">Áreas de Expertise</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                <span class="text-xs sm:text-sm text-gray-700 dark:text-gray-300">IA para crecimiento comercial</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                <span class="text-xs sm:text-sm text-gray-700 dark:text-gray-300">Machine & Deep Learning</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                <span class="text-xs sm:text-sm text-gray-700 dark:text-gray-300">Habilitación y adopción comercial</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                <span class="text-xs sm:text-sm text-gray-700 dark:text-gray-300">Sistemas de ventas a la medida</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Formación - bottom bar full width -->
+            <div class="bg-gray-50 dark:bg-zinc-800 px-6 sm:px-8 lg:px-10 py-4 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 7l-9-5 9-5 9 5-9 5z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-gray-900 dark:text-white">Tec de Monterrey</p>
+                    <p class="text-[11px] text-gray-500 dark:text-gray-400">Ing. Industrial y de Sistemas · Minor en IA y Machine Learning</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- CÉSAR AUGUSTO — FULL-WIDTH CARD (reversed)   -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="mb-16 sm:mb-24">
+        <div class="rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-sm overflow-hidden">
+            <!-- Layout imagen + contenido (reversed on lg) -->
+            <div class="flex flex-col lg:flex-row-reverse">
+                <!-- Foto -->
+                <div class="lg:w-2/5 relative bg-white dark:bg-zinc-900 flex items-center justify-center">
+                    <Image
+                        src={HeroCesar}
+                        alt="César Augusto Cid"
+                        class="w-full h-auto lg:h-full lg:object-contain lg:object-center"
+                        width={800}
+                        height={1000}
+                        quality={95}
+                    />
+                </div>
+
+                <!-- Info -->
+                <div class="lg:w-3/5 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+                    <!-- Badge de rol -->
+                    <div class="mb-4">
+                        <span class="inline-flex items-center gap-1.5 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            Socio Fundador
+                        </span>
+                    </div>
+
+                    <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl font-medium mb-2 leading-tight">
+                        César Augusto Cid
+                    </h2>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-5 font-medium">
+                        Finanzas Corporativas · Rentabilidad · Estrategia Comercial
+                    </p>
+
+                    <!-- Bio texto -->
+                    <p class="text-sm sm:text-base leading-relaxed text-gray-600 dark:text-gray-400 mb-6 text-justify">
+                        Lidera iniciativas de finanzas corporativas y rentabilidad aplicadas a estrategias comerciales. Cuenta con experiencia práctica en ventas y en el diseño e implementación de sistemas comerciales, habiendo acompañado a diversas organizaciones en la mejora de su desempeño comercial mediante métricas y criterios financieros de decisión. Su dominio en pricing, estructura de márgenes y flujo de efectivo le ha permitido impulsar crecimiento sostenible, alineando el desempeño comercial con objetivos de rentabilidad, siempre con un enfoque riguroso y orientado a resultados.
+                    </p>
+
+                    <!-- Áreas de expertise -->
+                    <div class="mb-6">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-3">Áreas de Expertise</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                <span class="text-xs sm:text-sm text-gray-700 dark:text-gray-300">Finanzas corporativas y control</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                <span class="text-xs sm:text-sm text-gray-700 dark:text-gray-300">Pricing y estructura de márgenes</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                <span class="text-xs sm:text-sm text-gray-700 dark:text-gray-300">Planeación financiera (estándar CFO)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-red-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                <span class="text-xs sm:text-sm text-gray-700 dark:text-gray-300">Sistemas comerciales rentables</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Formación - bottom bar full width -->
+            <div class="bg-gray-50 dark:bg-zinc-800 px-6 sm:px-8 lg:px-10 py-4 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 7l-9-5 9-5 9 5-9 5z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-gray-900 dark:text-white">Tec de Monterrey</p>
+                    <p class="text-[11px] text-gray-500 dark:text-gray-400">Lic. en Finanzas · Minor en Banca de Inversión</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- NUESTRO ENFOQUE — 3 PILARES                  -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="mb-16 sm:mb-24">
+        <!-- Separador -->
+        <div class="flex items-center gap-4 mb-10 sm:mb-14">
+            <div class="flex-grow h-px bg-gray-200 dark:bg-zinc-700"></div>
+            <span class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">Nuestro Enfoque</span>
+            <div class="flex-grow h-px bg-gray-200 dark:bg-zinc-700"></div>
         </div>
 
-        <div class="mt-12 sm:mt-16 flex justify-center">
-            <a
-                href="https://wa.me/525559446719?text=Hola%2C%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20Inner%20Circle"
-                target="_blank"
-                rel="noopener noreferrer"
-                style="display: inline-block; background-color: #16a34a; color: white; padding: 14px 32px; text-decoration: none; border-radius: 9999px; font-weight: 700; font-size: 1.125rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;"
-            >
-                Contactar
-            </a>
+        <div class="text-center mb-10 sm:mb-12">
+            <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-medium mb-4">
+                Lo que nos <span class="text-red-600">diferencia</span>
+            </h2>
+            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Nuestro estándar es simple: si tomamos un proyecto, nos hacemos responsables del resultado y no le fallamos a nuestros clientes.
+            </p>
         </div>
-    </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Pilar 1 -->
+            <div class="relative rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6 sm:p-8 shadow-sm group hover:border-red-300 dark:hover:border-red-800 transition-colors">
+                <div class="w-12 h-12 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                </div>
+                <h3 class="font-serif text-lg sm:text-xl font-medium mb-3">Involucración Total</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    No somos observadores externos. Nos integramos en la operación, entendemos el día a día y trabajamos codo a codo con tu equipo para generar impacto real.
+                </p>
+            </div>
+
+            <!-- Pilar 2 -->
+            <div class="relative rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6 sm:p-8 shadow-sm group hover:border-red-300 dark:hover:border-red-800 transition-colors">
+                <div class="w-12 h-12 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <h3 class="font-serif text-lg sm:text-xl font-medium mb-3">Ejecución, no solo Estrategia</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Convertimos cada plan en acción medible. No entregamos presentaciones que se archivan: implementamos sistemas que se ejecutan todos los días.
+                </p>
+            </div>
+
+            <!-- Pilar 3 -->
+            <div class="relative rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6 sm:p-8 shadow-sm group hover:border-red-300 dark:hover:border-red-800 transition-colors">
+                <div class="w-12 h-12 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                </div>
+                <h3 class="font-serif text-lg sm:text-xl font-medium mb-3">Resultados Medibles</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Cada proyecto tiene KPIs claros desde el inicio. Medimos, ajustamos y optimizamos hasta alcanzar los resultados comprometidos con nuestros clientes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- NUESTRO EQUIPO — TARJETA                     -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="mb-16 sm:mb-24">
+        <div class="rounded-xl border border-gray-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 p-8 sm:p-10 shadow-sm">
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex-shrink-0">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-red-50 dark:bg-red-900/20 flex items-center justify-center">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex-grow text-center sm:text-left">
+                    <h3 class="font-serif text-xl sm:text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
+                        Nuestro Equipo
+                    </h3>
+                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Además de los socios fundadores, contamos con colaboradores que comparten nuestra misión, visión y valores, y trabajan con rigor e integridad para mantener siempre el servicio que nos caracteriza.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- CTA FINAL                                    -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="mb-16 sm:mb-24">
+        <div class="text-center rounded-2xl border-2 border-red-600 bg-red-50 dark:bg-red-900/10 p-8 sm:p-12 lg:p-16">
+            <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-medium mb-4">
+                ¿Listo para dar el siguiente paso?
+            </h2>
+            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+                Platiquemos sobre cómo podemos ayudarte a crecer con un sistema comprobado. Sin compromiso, sin presión — solo una conversación honesta sobre tu negocio.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                    href="/tags"
+                    class="inline-flex items-center justify-center bg-red-600 text-white px-8 py-3.5 rounded-full font-bold text-base hover:bg-red-700 transition-colors shadow-lg"
+                >
+                    Solicitar diagnóstico
+                </a>
+                <a
+                    href="/projects"
+                    class="inline-flex items-center justify-center border-2 border-red-600 text-red-600 px-8 py-3.5 rounded-full font-bold text-base hover:bg-red-600 hover:text-white transition-colors"
+                >
+                    Ver Casos de Éxito
+                </a>
+            </div>
+        </div>
+    </section>
+
 </BaseLayout>
