@@ -1,8 +1,9 @@
 ---
 import type { GetStaticPathsOptions, Page } from 'astro';
+import { Image } from 'astro:assets';
 import { type CollectionEntry, getCollection } from 'astro:content';
+import logoTendenzza from '../../assets/images/LOGO TENDENZZA.png';
 import Pagination from '../../components/Pagination.astro';
-import ProjectPreview from '../../components/ProjectPreview.astro';
 import siteConfig from '../../data/site-config';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
@@ -16,20 +17,213 @@ type Props = { page: Page<CollectionEntry<'projects'>> };
 
 const { page } = Astro.props;
 const portfolio = page.data;
+
+const orderedProjects = [
+    ...portfolio.filter(p => p.id === 'tendenzza-stage-1'),
+    ...portfolio.filter(p => p.id === 'tendenzza-stage-2'),
+    ...portfolio.filter(p => p.id === 'tendenzza-stage-3'),
+    ...portfolio.filter(p => !['tendenzza-stage-1','tendenzza-stage-2','tendenzza-stage-3'].includes(p.id))
+];
+
+const stageLabels: Record<string, { phase: string; color: string; icon: string }> = {
+    'tendenzza-stage-1': { phase: 'Etapa 1', color: 'bg-red-600', icon: '⚙️' },
+    'tendenzza-stage-2': { phase: 'Etapa 2', color: 'bg-red-700', icon: '📐' },
+    'tendenzza-stage-3': { phase: 'Etapa 3', color: 'bg-red-800', icon: '👥' },
+};
+
+const stageSubtitles: Record<string, string> = {
+    'tendenzza-stage-1': 'Arquitectura e Implementación de un Sistema de Ventas',
+    'tendenzza-stage-2': 'Expansión, Posicionamiento y Diseño Comercial',
+    'tendenzza-stage-3': 'Equipo Elite — Contratación y Capacitación',
+};
+
+const stageKpis: Record<string, { label: string; value: string }[]> = {
+    'tendenzza-stage-1': [
+        { label: 'Sistema comercial', value: '6 fases' },
+        { label: 'Scripts operativos', value: '5' },
+        { label: 'Herramientas', value: 'Cotización + Pagos' },
+    ],
+    'tendenzza-stage-2': [
+        { label: 'Nuevos showrooms', value: '2 aperturas' },
+        { label: 'Diseñadores', value: '6 contratados' },
+        { label: 'Arquitectos', value: '1 integrado' },
+    ],
+    'tendenzza-stage-3': [
+        { label: 'Personal capacitado', value: 'Equipo completo' },
+        { label: 'Proceso', value: 'Evaluación + Filtro' },
+        { label: 'Resultado', value: 'Operación activa' },
+    ],
+};
 ---
 
 <BaseLayout title="Casos de Éxito" description="Casos reales donde implementamos estrategia, sistema y ejecución" showHeader={false}>
-    <h1 class="mb-4 font-serif text-3xl leading-tight font-medium sm:mb-8 sm:text-5xl">Casos de Éxito</h1>
-    <p class="mb-12 text-base sm:text-lg text-gray-600 dark:text-gray-400">Casos reales donde implementamos estrategia, sistema y ejecución. Cada etapa está documentada como un caso independiente.</p>
     
-    <div class="grid gap-8 md:grid-cols-1">
-        {[
-            ...portfolio.filter(p => p.id === 'tendenzza-stage-1'),
-            ...portfolio.filter(p => p.id === 'tendenzza-stage-2'),
-            ...portfolio.filter(p => p.id === 'tendenzza-stage-3'),
-            ...portfolio.filter(p => !['tendenzza-stage-1','tendenzza-stage-2','tendenzza-stage-3'].includes(p.id))
-        ].map((project) => <ProjectPreview project={project} class="rounded-xl border border-gray-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 p-6 shadow-sm hover:shadow-md transition-shadow" />)}
+    <!-- Hero Section -->
+    <section class="mb-16 sm:mb-20 text-center">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Icono decorativo -->
+            <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-red-600 rounded-2xl mb-8 shadow-lg">
+                <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+            </div>
+            
+            <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mb-6 sm:mb-8 leading-tight">
+                Casos de <span class="text-red-600">Éxito</span>
+            </h1>
+            
+            <p class="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Casos reales donde implementamos estrategia, sistema y ejecución.<br class="hidden sm:block" />
+                Cada etapa está documentada como un caso independiente.
+            </p>
+        </div>
+    </section>
+
+    <!-- Separador -->
+    <div class="flex items-center gap-4 mb-12 sm:mb-16">
+        <div class="flex-1 h-px bg-gray-200 dark:bg-zinc-700"></div>
+        <span class="text-xs font-semibold tracking-widest text-red-600 uppercase">Tendenzza — Caso documentado</span>
+        <div class="flex-1 h-px bg-gray-200 dark:bg-zinc-700"></div>
     </div>
+
+    <!-- Cliente Header Card -->
+    <div class="mb-10 sm:mb-14 rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6 sm:p-8 shadow-sm">
+        <div class="flex flex-col sm:flex-row items-center gap-5 sm:gap-8">
+            <div class="w-32 sm:w-40 flex-shrink-0">
+                <Image 
+                    src={logoTendenzza} 
+                    alt="Logo Tendenzza" 
+                    class="w-full h-auto"
+                    widths={[160, 320]}
+                    sizes="160px"
+                />
+            </div>
+            <div class="text-center sm:text-left">
+                <h2 class="font-serif text-xl sm:text-2xl font-medium mb-2">Tendenzza — Interiorismo Premium</h2>
+                <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Empresa con +27 años en el mercado. Especializada en diseño e instalación de espacios residenciales a medida — cocinas integrales, closets, recámaras y baños — con presencia en CDMX.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline de Etapas -->
+    <div class="relative">
+        <!-- Línea vertical del timeline -->
+        <div class="absolute left-6 sm:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-red-600 via-red-400 to-gray-200 dark:to-zinc-700 hidden md:block"></div>
+
+        <div class="space-y-8 sm:space-y-10">
+            {orderedProjects.map((project, index) => {
+                const meta = stageLabels[project.id];
+                const subtitle = stageSubtitles[project.id];
+                const kpis = stageKpis[project.id];
+                const isTendenzza = !!meta;
+
+                return (
+                    <a href={`/projects/${project.id}/`} class="group block">
+                        <div class="relative rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-lg hover:border-red-300 dark:hover:border-red-600 transition-all duration-300 overflow-hidden">
+                            
+                            {/* Top accent bar */}
+                            {isTendenzza && (
+                                <div class={`h-1.5 ${meta.color} w-full`}></div>
+                            )}
+
+                            <div class="p-6 sm:p-8 lg:p-10">
+                                <div class="flex flex-col lg:flex-row lg:items-start lg:gap-10">
+                                    
+                                    {/* Left: Number + Content */}
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-start gap-4 sm:gap-5 mb-4">
+                                            {/* Stage number circle */}
+                                            {isTendenzza ? (
+                                                <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-red-600 text-white flex items-center justify-center text-lg sm:text-xl font-bold shadow-md">
+                                                    {index + 1}
+                                                </div>
+                                            ) : (
+                                                <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 flex items-center justify-center text-lg sm:text-xl font-bold">
+                                                    {index + 1}
+                                                </div>
+                                            )}
+
+                                            <div class="min-w-0">
+                                                {isTendenzza && (
+                                                    <span class={`inline-block text-xs font-bold tracking-wider uppercase text-white ${meta.color} px-3 py-1 rounded-full mb-2`}>
+                                                        {meta.phase}
+                                                    </span>
+                                                )}
+                                                <h2 class="font-serif text-xl sm:text-2xl lg:text-[1.65rem] font-semibold leading-snug group-hover:text-red-600 transition-colors">
+                                                    {subtitle || project.data.title}
+                                                </h2>
+                                            </div>
+                                        </div>
+
+                                        {project.data.description && (
+                                            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed ml-16 sm:ml-[4.75rem]">
+                                                {project.data.description}
+                                            </p>
+                                        )}
+                                    </div>
+
+                                    {/* Right: KPIs + CTA */}
+                                    {isTendenzza && kpis && (
+                                        <div class="mt-6 lg:mt-0 lg:w-72 flex-shrink-0">
+                                            <div class="grid grid-cols-3 gap-3 sm:gap-4 lg:grid-cols-1 lg:gap-3">
+                                                {kpis.map((kpi) => (
+                                                    <div class="bg-gray-50 dark:bg-zinc-800 rounded-lg p-3 sm:p-4 text-center lg:text-left lg:flex lg:items-center lg:gap-3">
+                                                        <span class="block lg:inline text-base sm:text-lg font-bold text-red-600">{kpi.value}</span>
+                                                        <span class="block lg:inline text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-0.5 lg:mt-0">{kpi.label}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Footer CTA */}
+                                <div class="mt-6 pt-5 border-t border-gray-100 dark:border-zinc-800 flex items-center justify-between ml-16 sm:ml-[4.75rem]">
+                                    <div class="flex flex-wrap gap-2">
+                                        {project.data.tags?.slice(0, 3).map((tag: string) => (
+                                            <span class="text-xs font-medium bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 px-2.5 py-1 rounded-full">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <div class="flex items-center gap-2 text-red-600 font-semibold text-sm group-hover:gap-3 transition-all duration-300">
+                                        <span class="hidden sm:inline">Ver proceso completo</span>
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                );
+            })}
+        </div>
+    </div>
+
+    <!-- CTA Final -->
+    <section class="mt-16 sm:mt-24 text-center">
+        <div class="rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-8 sm:p-12 shadow-sm">
+            <h3 class="font-serif text-2xl sm:text-3xl font-medium mb-4">
+                ¿Quieres resultados <span class="text-red-600">así</span> para tu empresa?
+            </h3>
+            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-8 max-w-xl mx-auto">
+                Agenda un diagnóstico sin costo. Analizamos tu operación y te mostramos exactamente qué implementaríamos.
+            </p>
+            <a 
+                href="/tags"
+                class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-xl font-semibold text-sm sm:text-base hover:bg-red-700 transition-colors shadow-md hover:shadow-lg"
+            >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                Agendar diagnóstico gratuito
+            </a>
+        </div>
+    </section>
     
     <Pagination page={page} class="my-16 sm:my-24" />
 </BaseLayout>
