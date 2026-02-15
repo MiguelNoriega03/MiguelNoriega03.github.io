@@ -425,6 +425,20 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         });
     });
 
+    // --- GOOGLE SHEETS ---
+    const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwV40cJ5408EGQFzcIchArzI7P21LPteJxq7J7vRFIXdDlCC1JUK0njRvZc69ctE0BRGQ/exec';
+
+    function sendToGoogleSheets(data: Record<string, string>): Promise<boolean> {
+        return fetch(SHEETS_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        })
+        .then(() => true)
+        .catch(() => false);
+    }
+
     // --- FORM SUBMISSION ---
     document.getElementById('contact-form')?.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -439,6 +453,9 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         const solucion = (formData.get('solucion') as string) || '';
         const mas = (formData.get('mas') as string) || '';
         
+        // Guardar en Google Sheets (SIEMPRE, para todos los navegadores)
+        sendToGoogleSheets({ nombre, empresa, correo, celular, solucion, mensaje: mas });
+
         let mensaje = `*Nuevo contacto desde Inner Circle*\n\n`;
         mensaje += `*Nombre:* ${nombre}\n`;
         if (empresa) mensaje += `*Empresa:* ${empresa}\n`;
@@ -455,9 +472,7 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         if (directLink) directLink.href = urls.api;
 
         if (isTikTok()) {
-            // === TIKTOK: Ya tenemos su celular, mostrar éxito y enviar datos por WhatsApp en background ===
-            // Intentar abrir WhatsApp (probablemente no funcione pero no importa, tenemos el celular)
-            try { window.location.href = urls.native; } catch(e) {}
+            // === TIKTOK: Datos ya guardados en Google Sheets, mostrar éxito ===
             showTikTokSuccess();
         } else if (isInAppBrowser()) {
             // === INSTAGRAM/FACEBOOK/OTROS: auto-redirect con cadena de fallback ===
