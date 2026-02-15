@@ -66,6 +66,25 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
                     />
                 </div>
 
+                {/* Celular - Oculto por defecto, se muestra y es obligatorio en TikTok */}
+                <div id="celular-field" class="hidden">
+                    <label for="celular" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        Celular (WhatsApp) <span class="text-red-600">*</span>
+                    </label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-sm">🇲🇽 +52</span>
+                        <input 
+                            type="tel" 
+                            id="celular" 
+                            name="celular"
+                            placeholder="55 1234 5678"
+                            pattern="[0-9\s\-]{7,15}"
+                            class="w-full pl-20 pr-4 py-3 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                        />
+                    </div>
+                    <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Te escribiremos por WhatsApp a este número</p>
+                </div>
+
                 {/* Solución de interés - Obligatorio */}
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
@@ -126,29 +145,37 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
                     Enviar por WhatsApp
                 </button>
 
+                {/* Mensaje de éxito para TikTok — se muestra tras enviar */}
+                <div id="tiktok-success" class="hidden">
+                    <div class="text-center py-6">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full mb-4">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold text-green-700 dark:text-green-400 mb-2">¡Formulario recibido!</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Te contactaremos por WhatsApp al número que proporcionaste.</p>
+                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-3">Normalmente respondemos en menos de 24 horas.</p>
+                    </div>
+                </div>
             </form>
-            <p id="form-footer-text" class="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+            <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
                 Al hacer clic, se abrirá WhatsApp con tu mensaje listo para enviar.
             </p>
 
             {/* Banner de in-app browser - oculto por defecto */}
-            <div id="inapp-banner" class="hidden mt-6 p-5 bg-amber-50 dark:bg-amber-900/30 border-2 border-amber-300 dark:border-amber-600 rounded-2xl text-center">
-                <p id="inapp-banner-title" class="text-base font-bold text-amber-800 dark:text-amber-300 mb-2">
-                    ⚠️ Estás navegando desde TikTok
+            <div id="inapp-banner" class="hidden mt-6 p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-xl text-center">
+                <p class="text-sm font-semibold text-amber-800 dark:text-amber-300 mb-2">
+                    ⚠️ Estás usando un navegador interno (TikTok, Instagram, etc.)
                 </p>
-                <p id="inapp-banner-desc" class="text-sm text-amber-700 dark:text-amber-400 mb-4">
+                <p class="text-xs text-amber-700 dark:text-amber-400 mb-3">
                     Para que WhatsApp abra correctamente, abre esta página en Safari o Chrome.
                 </p>
                 <button 
                     id="copy-url-btn"
-                    class="inline-flex items-center gap-2 bg-amber-600 text-white px-5 py-3 rounded-xl text-sm font-bold hover:bg-amber-700 transition-colors shadow-md"
+                    class="inline-flex items-center gap-2 bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-amber-700 transition-colors"
                 >
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
                     Copiar enlace de esta página
                 </button>
-                <p id="copy-url-success" class="hidden text-xs text-green-700 dark:text-green-400 font-semibold mt-3">
-                    ✅ ¡Enlace copiado! Pégalo en Safari o Chrome para enviar tu formulario.
-                </p>
             </div>
 
             {/* Modal de fallback cuando WhatsApp no abre */}
@@ -269,35 +296,18 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         }
     }
 
-    // --- Para TikTok: ocultar formulario y mostrar solo el banner de "abre en Safari" ---
-    function showTikTokTapButton(message: string, urls: ReturnType<typeof buildWhatsAppURLs>) {
+    // --- Para TikTok: mostrar mensaje de éxito (ya tenemos su celular) ---
+    function showTikTokSuccess() {
         // Ocultar el formulario completo
         const form = document.getElementById('contact-form');
         if (form) form.classList.add('hidden');
 
-        // Ocultar el texto de pie
-        const footerText = document.getElementById('form-footer-text');
-        if (footerText) footerText.classList.add('hidden');
-
-        // Mostrar y actualizar el banner
-        const banner = document.getElementById('inapp-banner');
-        if (banner) {
-            banner.classList.remove('hidden');
-            // Agrandar y centrar el banner como elemento principal
-            banner.classList.remove('mt-6');
-            banner.classList.add('mt-2');
+        // Mostrar mensaje de éxito
+        const success = document.getElementById('tiktok-success');
+        if (success) {
+            success.classList.remove('hidden');
+            success.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-
-        // Actualizar título del banner con confirmación
-        const title = document.getElementById('inapp-banner-title');
-        if (title) title.innerHTML = '✅ ¡Formulario recibido!<br><span class="text-sm font-normal">Estás navegando desde TikTok</span>';
-
-        // Actualizar descripción
-        const desc = document.getElementById('inapp-banner-desc');
-        if (desc) desc.textContent = 'Para completar el envío por WhatsApp, abre esta página en Safari o Chrome.';
-
-        // Scroll al banner
-        banner?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     // --- Modal de fallback dinámico ---
@@ -349,22 +359,33 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         const banner = document.getElementById('inapp-banner');
         if (banner) banner.classList.remove('hidden');
 
-        // En otros in-app browsers (Instagram, etc.), ajustar el título
-        if (!isTikTok()) {
-            const bannerTitle = document.getElementById('inapp-banner-title');
-            if (bannerTitle) bannerTitle.textContent = '⚠️ Estás usando un navegador interno';
+        // En TikTok: mostrar campo celular, cambiar botón, y personalizar banner
+        if (isTikTok()) {
+            const bannerText = banner?.querySelector('p:first-child');
+            if (bannerText) bannerText.textContent = '⚠️ Estás navegando desde TikTok';
+            const bannerDesc = banner?.querySelector('p:nth-child(2)');
+            if (bannerDesc) bannerDesc.textContent = 'Para que WhatsApp abra correctamente, abre esta página en Safari o Chrome.';
+
+            // Mostrar campo celular y hacerlo obligatorio
+            const celularField = document.getElementById('celular-field');
+            const celularInput = document.getElementById('celular') as HTMLInputElement;
+            if (celularField) celularField.classList.remove('hidden');
+            if (celularInput) celularInput.required = true;
+
+            // Cambiar texto del botón submit
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) submitBtn.textContent = 'Enviar formulario';
         }
         
         document.getElementById('copy-url-btn')?.addEventListener('click', () => {
             copyToClipboard(window.location.href).then(() => {
                 const btn = document.getElementById('copy-url-btn');
                 if (btn) {
-                    btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> ¡Enlace copiado!';
-                    btn.classList.remove('bg-amber-600', 'hover:bg-amber-700');
-                    btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> ¡Enlace copiado!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg> Copiar enlace de esta página';
+                    }, 3000);
                 }
-                const successMsg = document.getElementById('copy-url-success');
-                if (successMsg) successMsg.classList.remove('hidden');
             });
         });
     }
@@ -409,6 +430,7 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         const nombre = (formData.get('nombre') as string) || '';
         const empresa = (formData.get('empresa') as string) || '';
         const correo = (formData.get('correo') as string) || '';
+        const celular = (formData.get('celular') as string) || '';
         const solucion = (formData.get('solucion') as string) || '';
         const mas = (formData.get('mas') as string) || '';
         
@@ -416,6 +438,7 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         mensaje += `*Nombre:* ${nombre}\n`;
         if (empresa) mensaje += `*Empresa:* ${empresa}\n`;
         mensaje += `*Correo:* ${correo}\n`;
+        if (celular) mensaje += `*Celular:* ${celular}\n`;
         mensaje += `*Solución de interés:* ${solucion}\n`;
         if (mas) mensaje += `\n*Información adicional:*\n${mas}`;
         
@@ -427,10 +450,10 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         if (directLink) directLink.href = urls.api;
 
         if (isTikTok()) {
-            // === TIKTOK: NO auto-redirigir. Mostrar botón <a> real para que el usuario toque ===
-            // TikTok bloquea window.location.href a otros esquemas, pero NO puede bloquear
-            // un tap real del usuario en un <a href> — es comportamiento fundamental del navegador.
-            showTikTokTapButton(mensaje, urls);
+            // === TIKTOK: Ya tenemos su celular, mostrar éxito y enviar datos por WhatsApp en background ===
+            // Intentar abrir WhatsApp (probablemente no funcione pero no importa, tenemos el celular)
+            try { window.location.href = urls.native; } catch(e) {}
+            showTikTokSuccess();
         } else if (isInAppBrowser()) {
             // === INSTAGRAM/FACEBOOK/OTROS: auto-redirect con cadena de fallback ===
             openWhatsAppInApp(mensaje, urls);
