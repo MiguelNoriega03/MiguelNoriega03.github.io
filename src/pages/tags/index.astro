@@ -299,19 +299,41 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
 
     // --- Para TikTok: mostrar mensaje de éxito (ya tenemos su celular) ---
     function showTikTokSuccess() {
-        // Ocultar todo: formulario, texto de WhatsApp, banner de TikTok
-        const form = document.getElementById('contact-form');
-        const hint = document.getElementById('whatsapp-hint');
-        const banner = document.getElementById('inapp-banner');
-        if (form) form.classList.add('hidden');
-        if (hint) hint.classList.add('hidden');
-        if (banner) banner.classList.add('hidden');
+        try {
+            // Ocultar todo: formulario, texto de WhatsApp, banner de TikTok
+            const form = document.getElementById('contact-form');
+            const hint = document.getElementById('whatsapp-hint');
+            const banner = document.getElementById('inapp-banner');
+            if (form) form.style.display = 'none'; // style.display es más confiable que classList en WebViews
+            if (hint) hint.style.display = 'none';
+            if (banner) banner.style.display = 'none';
 
-        // Mostrar mensaje de éxito
-        const success = document.getElementById('tiktok-success');
-        if (success) {
-            success.classList.remove('hidden');
-            success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Mostrar mensaje de éxito
+            const success = document.getElementById('tiktok-success');
+            if (success) {
+                success.classList.remove('hidden');
+                success.style.display = 'block';
+                // scrollIntoView con behavior:'smooth' falla en algunos WebViews
+                // Usar requestAnimationFrame + window.scrollTo para máxima compatibilidad
+                requestAnimationFrame(() => {
+                    try {
+                        const rect = success.getBoundingClientRect();
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        const targetY = scrollTop + rect.top - (window.innerHeight / 2) + (rect.height / 2);
+                        window.scrollTo(0, Math.max(0, targetY));
+                    } catch (_) {
+                        // Si falla el scroll, al menos el mensaje ya es visible
+                    }
+                });
+            }
+        } catch (err) {
+            // Safety net: si algo falla, al menos intentar mostrar el éxito
+            try {
+                const s = document.getElementById('tiktok-success');
+                if (s) { s.classList.remove('hidden'); s.style.display = 'block'; }
+                const f = document.getElementById('contact-form');
+                if (f) f.style.display = 'none';
+            } catch (_) {}
         }
     }
 
@@ -446,7 +468,10 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
             try {
                 const iframe = document.createElement('iframe');
                 iframe.name = 'sheets-iframe-' + Date.now();
-                iframe.style.cssText = 'display:none;width:0;height:0;border:0;';
+                iframe.style.cssText = 'display:none;width:0;height:0;border:0;position:absolute;left:-9999px;';
+                iframe.setAttribute('sandbox', 'allow-scripts allow-forms');
+                iframe.setAttribute('tabindex', '-1');
+                iframe.setAttribute('aria-hidden', 'true');
                 document.body.appendChild(iframe);
 
                 const form = document.createElement('form');
@@ -548,10 +573,10 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         if (directLink) directLink.href = urls.api;
 
         if (isTikTok()) {
-            // === TIKTOK: Esperar un momento para asegurar que el form POST se envíe ===
-            setTimeout(() => {
-                showTikTokSuccess();
-            }, 800);
+            // === TIKTOK: Mostrar éxito INMEDIATAMENTE y enviar datos en background ===
+            // No usar setTimeout para el mensaje — es frágil en WebViews de TikTok.
+            // Primero mostramos el éxito, luego enviamos los datos (ya tenemos todo lo que necesitamos).
+            showTikTokSuccess();
         } else if (isInAppBrowser()) {
             // === INSTAGRAM/FACEBOOK/OTROS: auto-redirect con cadena de fallback ===
             openWhatsAppInApp(mensaje, urls);
