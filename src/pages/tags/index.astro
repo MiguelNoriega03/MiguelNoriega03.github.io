@@ -198,22 +198,148 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
 </BaseLayout>
 
 <script>
-    // --- Detección de in-app browser ---
+    const PHONE = '525591659829';
+
+    // --- Detección de entorno ---
     function isInAppBrowser(): boolean {
         const ua = navigator.userAgent || navigator.vendor || '';
-        // TikTok, Instagram, Facebook, Snapchat, Line, Twitter/X in-app browsers
         return /musical_ly|tiktok|bytedance|instagram|FBAN|FBAV|FB_IAB|snapchat|line\//i.test(ua) 
             || /twitter|wv\)|WebView/i.test(ua);
     }
+    function isIOS(): boolean { return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
+    function isAndroid(): boolean { return /Android/i.test(navigator.userAgent); }
+
+    // --- Copiar al clipboard con fallback para WebViews viejos ---
+    function copyToClipboard(text: string): Promise<void> {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(text);
+        }
+        return new Promise((resolve) => {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.cssText = 'position:fixed;opacity:0;left:-9999px;';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            resolve();
+        });
+    }
+
+    // --- Construir todas las variantes de URL de WhatsApp ---
+    function buildWhatsAppURLs(message: string) {
+        const encoded = encodeURIComponent(message);
+        return {
+            // Esquema nativo: abre la app directamente (funciona en MUCHOS WebViews)
+            native: `whatsapp://send?phone=${PHONE}&text=${encoded}`,
+            // API universal link: mejor compatibilidad general
+            api: `https://api.whatsapp.com/send?phone=${PHONE}&text=${encoded}`,
+            // Intent de Android: fuerza apertura de la app desde WebViews
+            intent: `intent://send?phone=${PHONE}&text=${encoded}#Intent;scheme=whatsapp;package=com.whatsapp;end;`,
+            // wa.me: respaldo clásico 
+            wa_me: `https://wa.me/${PHONE}?text=${encoded}`,
+        };
+    }
+
+    // --- Estrategia agresiva de apertura para in-app browsers ---
+    function openWhatsAppInApp(message: string, urls: ReturnType<typeof buildWhatsAppURLs>) {
+        if (isAndroid()) {
+            // Android: intent:// es lo más confiable para abrir apps desde WebViews
+            window.location.href = urls.intent;
+            // Fallback 1: esquema nativo
+            setTimeout(() => {
+                window.location.href = urls.native;
+                // Fallback 2: API URL
+                setTimeout(() => {
+                    window.location.href = urls.api;
+                    // Fallback 3: modal
+                    setTimeout(() => showFallbackModal(message, urls), 2000);
+                }, 1500);
+            }, 1500);
+        } else if (isIOS()) {
+            // iOS: probar esquema nativo whatsapp:// primero
+            window.location.href = urls.native;
+            // Fallback 1: API URL con location.href  
+            setTimeout(() => {
+                window.location.href = urls.api;
+                // Fallback 2: modal
+                setTimeout(() => showFallbackModal(message, urls), 2000);
+            }, 1500);
+        } else {
+            window.location.href = urls.api;
+            setTimeout(() => showFallbackModal(message, urls), 3000);
+        }
+    }
+
+    // --- Modal de fallback con todas las opciones ---
+    function showFallbackModal(message: string, urls: ReturnType<typeof buildWhatsAppURLs>) {
+        if (document.getElementById('wa-fallback-overlay')) return;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'wa-fallback-overlay';
+        overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60';
+        overlay.innerHTML = `
+            <div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl max-w-sm w-full p-6 text-center relative">
+                <button id="wa-fb-close" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+                <div class="text-4xl mb-3">📱</div>
+                <h3 class="font-serif text-lg font-semibold mb-1 text-gray-900 dark:text-white">¿No se abrió WhatsApp?</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-5">Este navegador restringe la apertura de apps. Usa una opción:</p>
+                
+                <div class="space-y-2.5">
+                    <button id="wa-fb-copy" class="w-full py-3 px-4 bg-green-500 hover:bg-green-600 text-white rounded-xl font-semibold text-sm transition-colors">
+                        📋 Copiar mensaje + abrir WhatsApp
+                    </button>
+                    <a id="wa-fb-direct" href="${urls.api}" target="_blank" rel="noopener noreferrer" class="block w-full py-3 px-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold text-sm transition-colors text-center no-underline">
+                        🔗 Abrir enlace directo
+                    </a>
+                    <button id="wa-fb-copyurl" class="w-full py-3 px-4 bg-gray-900 hover:bg-gray-800 text-white rounded-xl font-semibold text-sm transition-colors">
+                        🌐 Copiar enlace para Safari/Chrome
+                    </button>
+                </div>
+                <div id="wa-fb-success" class="hidden mt-3 p-2 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 rounded-lg">
+                    <p class="text-xs font-semibold text-green-700 dark:text-green-400">✅ ¡Copiado! Envíalo al +52 55 9165 9829</p>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        // Cerrar modal
+        document.getElementById('wa-fb-close')?.addEventListener('click', () => overlay.remove());
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+
+        // Copiar mensaje y abrir WhatsApp genérico
+        document.getElementById('wa-fb-copy')?.addEventListener('click', () => {
+            copyToClipboard(message).then(() => {
+                const btn = document.getElementById('wa-fb-copy');
+                if (btn) { btn.textContent = '✅ ¡Copiado! Abriendo WhatsApp...'; btn.style.background = '#128C7E'; }
+                const s = document.getElementById('wa-fb-success');
+                if (s) s.classList.remove('hidden');
+                // Intentar abrir WhatsApp sin chat para que pegue manualmente
+                setTimeout(() => { window.location.href = 'whatsapp://'; }, 600);
+            });
+        });
+
+        // Copiar URL de WhatsApp para abrir en Safari/Chrome
+        document.getElementById('wa-fb-copyurl')?.addEventListener('click', () => {
+            copyToClipboard(urls.api).then(() => {
+                const btn = document.getElementById('wa-fb-copyurl');
+                if (btn) { btn.textContent = '✅ ¡Enlace copiado! Pégalo en Safari'; btn.style.background = '#333'; }
+            });
+        });
+    }
+
+    // === INIT ===
 
     // Mostrar banner si estamos en in-app browser
     if (isInAppBrowser()) {
         const banner = document.getElementById('inapp-banner');
         if (banner) banner.classList.remove('hidden');
         
-        // Botón copiar URL de la página
         document.getElementById('copy-url-btn')?.addEventListener('click', () => {
-            navigator.clipboard.writeText(window.location.href).then(() => {
+            copyToClipboard(window.location.href).then(() => {
                 const btn = document.getElementById('copy-url-btn');
                 if (btn) {
                     btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> ¡Enlace copiado!';
@@ -228,42 +354,35 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
     // Preseleccionar opción basada en parámetro URL
     const urlParams = new URLSearchParams(window.location.search);
     const solucionParam = urlParams.get('solucion');
-    
     if (solucionParam === 'ia') {
-        const radioIA = document.querySelector('input[name="solucion"][value="Soluciones con IA"]') as HTMLInputElement;
-        if (radioIA) radioIA.checked = true;
+        const r = document.querySelector('input[name="solucion"][value="Soluciones con IA"]') as HTMLInputElement;
+        if (r) r.checked = true;
     } else if (solucionParam === 'ventas') {
-        const radioVentas = document.querySelector('input[name="solucion"][value="Soluciones de venta"]') as HTMLInputElement;
-        if (radioVentas) radioVentas.checked = true;
+        const r = document.querySelector('input[name="solucion"][value="Soluciones de venta"]') as HTMLInputElement;
+        if (r) r.checked = true;
     }
 
     // --- Variables globales para el mensaje ---
     let lastMessage = '';
-    let lastWhatsAppUrl = '';
 
-    // --- Modal controls ---
+    // --- Modal controls (HTML modal existente) ---
     document.getElementById('close-modal')?.addEventListener('click', () => {
         document.getElementById('fallback-modal')?.classList.add('hidden');
     });
-
     document.getElementById('fallback-modal')?.addEventListener('click', (e) => {
-        if (e.target === e.currentTarget) {
-            document.getElementById('fallback-modal')?.classList.add('hidden');
-        }
+        if (e.target === e.currentTarget) document.getElementById('fallback-modal')?.classList.add('hidden');
     });
-
-    // Copiar mensaje al clipboard
     document.getElementById('copy-msg-btn')?.addEventListener('click', () => {
-        navigator.clipboard.writeText(lastMessage).then(() => {
-            const successEl = document.getElementById('copy-success');
-            if (successEl) successEl.classList.remove('hidden');
-            setTimeout(() => {
-                if (successEl) successEl.classList.add('hidden');
-            }, 5000);
+        copyToClipboard(lastMessage).then(() => {
+            const s = document.getElementById('copy-success');
+            if (s) s.classList.remove('hidden');
+            // Intentar abrir WhatsApp genérico
+            setTimeout(() => { window.location.href = 'whatsapp://'; }, 600);
+            setTimeout(() => { if (s) s.classList.add('hidden'); }, 5000);
         });
     });
 
-    // --- Form submission con fallback strategy ---
+    // --- Form submission con estrategia agresiva de múltiples esquemas ---
     document.getElementById('contact-form')?.addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -283,40 +402,19 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         mensaje += `*Solución de interés:* ${solucion}\n`;
         if (mas) mensaje += `\n*Información adicional:*\n${mas}`;
         
-        // Guardar para fallback
         lastMessage = mensaje;
-        const encodedMsg = encodeURIComponent(mensaje);
-        
-        // Usar api.whatsapp.com (mejor compatibilidad en WebViews que wa.me)
-        const apiUrl = `https://api.whatsapp.com/send?phone=525591659829&text=${encodedMsg}`;
-        // wa.me como respaldo
-        const waUrl = `https://wa.me/525591659829?text=${encodedMsg}`;
-        lastWhatsAppUrl = apiUrl;
+        const urls = buildWhatsAppURLs(mensaje);
 
-        // Actualizar link directo del modal
+        // Actualizar link directo del modal HTML existente
         const directLink = document.getElementById('whatsapp-direct-link') as HTMLAnchorElement;
-        if (directLink) directLink.href = apiUrl;
+        if (directLink) directLink.href = urls.api;
 
         if (isInAppBrowser()) {
-            // En in-app browser: usar location.href (más compatible que window.open)
-            // Intentar con api.whatsapp.com primero, luego mostrar fallback
-            window.location.href = apiUrl;
-            
-            // Si después de 2.5s seguimos en la página, mostrar el modal de fallback
-            setTimeout(() => {
-                document.getElementById('fallback-modal')?.classList.remove('hidden');
-            }, 2500);
+            // === ESTRATEGIA AGRESIVA PARA IN-APP BROWSERS ===
+            openWhatsAppInApp(mensaje, urls);
         } else {
-            // En navegador normal: usar window.open (funciona bien)
-            const opened = window.open(apiUrl, '_blank');
-            
-            // Si window.open fue bloqueado (devuelve null), usar fallback
-            if (!opened) {
-                window.location.href = apiUrl;
-                setTimeout(() => {
-                    document.getElementById('fallback-modal')?.classList.remove('hidden');
-                }, 2500);
-            }
+            // Navegador normal: funciona perfecto con location.href
+            window.location.href = urls.api;
         }
     });
 </script>
