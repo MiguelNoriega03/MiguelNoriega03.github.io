@@ -231,6 +231,7 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
 
 <script>
     const PHONE = '525591659829';
+    const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxuTeZTTYkiiaC9XmD5CvI4b-qh5KX-JVUh-ZtFqf6JJt2f2GhKdqPvzK1Db8qXw1-Qxw/exec';
 
     // --- Detección de entorno ---
     function isInAppBrowser(): boolean {
@@ -300,34 +301,27 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
     // --- Para TikTok: mostrar mensaje de éxito (ya tenemos su celular) ---
     function showTikTokSuccess() {
         try {
-            // Ocultar todo: formulario, texto de WhatsApp, banner de TikTok
             const form = document.getElementById('contact-form');
             const hint = document.getElementById('whatsapp-hint');
             const banner = document.getElementById('inapp-banner');
-            if (form) form.style.display = 'none'; // style.display es más confiable que classList en WebViews
+            if (form) form.style.display = 'none';
             if (hint) hint.style.display = 'none';
             if (banner) banner.style.display = 'none';
 
-            // Mostrar mensaje de éxito
             const success = document.getElementById('tiktok-success');
             if (success) {
                 success.classList.remove('hidden');
                 success.style.display = 'block';
-                // scrollIntoView con behavior:'smooth' falla en algunos WebViews
-                // Usar requestAnimationFrame + window.scrollTo para máxima compatibilidad
                 requestAnimationFrame(() => {
                     try {
                         const rect = success.getBoundingClientRect();
                         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                         const targetY = scrollTop + rect.top - (window.innerHeight / 2) + (rect.height / 2);
                         window.scrollTo(0, Math.max(0, targetY));
-                    } catch (_) {
-                        // Si falla el scroll, al menos el mensaje ya es visible
-                    }
+                    } catch (_) {}
                 });
             }
         } catch (err) {
-            // Safety net: si algo falla, al menos intentar mostrar el éxito
             try {
                 const s = document.getElementById('tiktok-success');
                 if (s) { s.classList.remove('hidden'); s.style.display = 'block'; }
@@ -379,102 +373,23 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         });
     }
 
-    // === INIT ===
-
-    // Mostrar banner si estamos en in-app browser
-    if (isInAppBrowser()) {
-        const banner = document.getElementById('inapp-banner');
-        if (banner) banner.classList.remove('hidden');
-
-        // En TikTok: mostrar campo celular, cambiar botón, y personalizar banner
-        if (isTikTok()) {
-            const bannerText = banner?.querySelector('p:first-child');
-            if (bannerText) bannerText.textContent = '⚠️ Estás navegando desde TikTok';
-            const bannerDesc = banner?.querySelector('p:nth-child(2)');
-            if (bannerDesc) bannerDesc.textContent = 'Para que WhatsApp abra correctamente, abre esta página en Safari o Chrome.';
-
-            // Mostrar campo celular y hacerlo obligatorio
-            const celularField = document.getElementById('celular-field');
-            const celularInput = document.getElementById('celular') as HTMLInputElement;
-            if (celularField) celularField.classList.remove('hidden');
-            if (celularInput) celularInput.required = true;
-
-            // Cambiar texto del botón submit
-            const submitBtn = document.getElementById('submit-btn');
-            if (submitBtn) submitBtn.textContent = 'Enviar formulario';
-        }
-        
-        document.getElementById('copy-url-btn')?.addEventListener('click', () => {
-            copyToClipboard(window.location.href).then(() => {
-                const btn = document.getElementById('copy-url-btn');
-                if (btn) {
-                    btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> ¡Enlace copiado!';
-                    setTimeout(() => {
-                        btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg> Copiar enlace de esta página';
-                    }, 3000);
-                }
-            });
-        });
-    }
-
-    // Preseleccionar opción basada en parámetro URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const solucionParam = urlParams.get('solucion');
-    if (solucionParam === 'ia') {
-        const r = document.querySelector('input[name="solucion"][value="Soluciones con IA"]') as HTMLInputElement;
-        if (r) r.checked = true;
-    } else if (solucionParam === 'ventas') {
-        const r = document.querySelector('input[name="solucion"][value="Soluciones de venta"]') as HTMLInputElement;
-        if (r) r.checked = true;
-    }
-
-    // --- Variables globales ---
-    let lastMessage = '';
-
-    // --- Modal HTML existente controls ---
-    document.getElementById('close-modal')?.addEventListener('click', () => {
-        document.getElementById('fallback-modal')?.classList.add('hidden');
-    });
-    document.getElementById('fallback-modal')?.addEventListener('click', (e) => {
-        if (e.target === e.currentTarget) document.getElementById('fallback-modal')?.classList.add('hidden');
-    });
-    document.getElementById('copy-msg-btn')?.addEventListener('click', () => {
-        copyToClipboard(lastMessage).then(() => {
-            const s = document.getElementById('copy-success');
-            if (s) s.classList.remove('hidden');
-            setTimeout(() => { window.location.href = 'whatsapp://'; }, 600);
-            setTimeout(() => { if (s) s.classList.add('hidden'); }, 5000);
-        });
-    });
-
-    // --- GOOGLE SHEETS ---
-    const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxuTeZTTYkiiaC9XmD5CvI4b-qh5KX-JVUh-ZtFqf6JJt2f2GhKdqPvzK1Db8qXw1-Qxw/exec';
-
+    // --- Google Sheets: enviar datos (fire-and-forget) ---
     function sendToGoogleSheets(data: Record<string, string>): void {
-        // Estrategia multi-fallback para máxima compatibilidad con in-app browsers (TikTok, IG, etc.)
-        // Todos los métodos se disparan en paralelo, fire-and-forget.
-        // NO retorna Promise — el éxito visual NO depende de esto.
-
-        // === MÉTODO 1: Image pixel GET (el más compatible con TODOS los WebViews) ===
-        // Google Apps Script soporta doGet, así que enviamos datos como query params
+        // Método 1: Image pixel GET (el más compatible con WebViews)
         try {
             const params = new URLSearchParams(data).toString();
             const img = new Image();
             img.src = SHEETS_URL + '?' + params + '&_t=' + Date.now();
-            // No necesitamos esperar a que cargue — el request ya se envió
         } catch (err) {
             console.warn('Image pixel failed', err);
         }
 
-        // === MÉTODO 2: Form POST via iframe oculto (bypasea CORS) ===
-        // Envolver en setTimeout(0) para que NO bloquee el hilo principal
-        // y no interrumpa la UI (showTikTokSuccess) en WebViews de TikTok
+        // Método 2: Form POST via iframe oculto (bypasea CORS)
         setTimeout(() => {
             try {
                 const iframe = document.createElement('iframe');
                 iframe.name = 'sheets-iframe-' + Date.now();
                 iframe.style.cssText = 'display:none;width:0;height:0;border:0;position:absolute;left:-9999px;';
-                // NO usar sandbox — bloquea el redirect 302 de Google Apps Script
                 iframe.setAttribute('tabindex', '-1');
                 iframe.setAttribute('aria-hidden', 'true');
                 document.body.appendChild(iframe);
@@ -496,7 +411,6 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
                 document.body.appendChild(form);
                 form.submit();
 
-                // Limpiar después de un tiempo
                 setTimeout(() => {
                     try { form.remove(); iframe.remove(); } catch (_) {}
                 }, 8000);
@@ -505,7 +419,7 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
             }
         }, 50);
 
-        // === MÉTODO 3: fetch con text/plain ===
+        // Método 3: fetch con text/plain
         try {
             fetch(SHEETS_URL, {
                 method: 'POST',
@@ -517,7 +431,7 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
             console.warn('fetch fallback failed', err);
         }
 
-        // === MÉTODO 4: sendBeacon como último recurso ===
+        // Método 4: sendBeacon
         try {
             if (navigator.sendBeacon) {
                 const blob = new Blob([JSON.stringify(data)], { type: 'text/plain' });
@@ -528,66 +442,135 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         }
     }
 
-    // --- FORM SUBMISSION ---
-    document.getElementById('contact-form')?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const form = e.target as HTMLFormElement;
-        const formData = new FormData(form);
-        
-        const nombre = (formData.get('nombre') as string) || '';
-        const empresa = (formData.get('empresa') as string) || '';
-        const correo = (formData.get('correo') as string) || '';
-        const celular = (formData.get('celular') as string) || '';
-        const solucion = (formData.get('solucion') as string) || '';
-        const mas = (formData.get('mas') as string) || '';
+    // ==========================================================================
+    // INIT: Todo lo que necesita re-ejecutarse en cada navegación (View Transitions)
+    // Se usa document.addEventListener('astro:page-load', ...) que se dispara tanto
+    // en full page load como en client-side navigation via ClientRouter.
+    // ==========================================================================
+    function initContactForm() {
+        // Solo ejecutar si estamos en la página del formulario
+        const contactForm = document.getElementById('contact-form');
+        if (!contactForm) return;
 
-        // Deshabilitar botón y mostrar loading
-        const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Enviando...';
-            submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
-        }
+        // Variable local para el mensaje
+        let lastMessage = '';
 
-        // Preparar datos para Google Sheets
-        const sheetsData = { nombre, empresa, correo, celular, solucion, mensaje: mas };
-
-        if (isTikTok()) {
-            // === TIKTOK: Mostrar éxito PRIMERO, luego enviar datos en background ===
-            // El orden es CRÍTICO: showTikTokSuccess() ANTES de sendToGoogleSheets()
-            // porque form.submit() dentro de sendToGoogleSheets puede interrumpir
-            // la ejecución de JS en el WebView restrictivo de TikTok.
-            showTikTokSuccess();
-            // Enviar datos DESPUÉS de que la UI ya cambió (fire-and-forget)
-            sendToGoogleSheets(sheetsData);
-            return; // No continuar con WhatsApp
-        }
-
-        // Para TODOS los demás navegadores: enviar a Sheets primero
-        sendToGoogleSheets(sheetsData);
-
-        let mensaje = `*Nuevo contacto desde Inner Circle*\n\n`;
-        mensaje += `*Nombre:* ${nombre}\n`;
-        if (empresa) mensaje += `*Empresa:* ${empresa}\n`;
-        mensaje += `*Correo:* ${correo}\n`;
-        if (celular) mensaje += `*Celular:* ${celular}\n`;
-        mensaje += `*Solución de interés:* ${solucion}\n`;
-        if (mas) mensaje += `\n*Información adicional:*\n${mas}`;
-        
-        lastMessage = mensaje;
-        const urls = buildWhatsAppURLs(mensaje);
-
-        // Actualizar link directo del modal HTML existente
-        const directLink = document.getElementById('whatsapp-direct-link') as HTMLAnchorElement;
-        if (directLink) directLink.href = urls.api;
-
+        // --- INIT: in-app browser detection ---
         if (isInAppBrowser()) {
-            // === INSTAGRAM/FACEBOOK/OTROS: auto-redirect con cadena de fallback ===
-            openWhatsAppInApp(mensaje, urls);
-        } else {
-            // === NAVEGADOR NORMAL: funciona directo ===
-            window.location.href = urls.api;
+            const banner = document.getElementById('inapp-banner');
+            if (banner) banner.classList.remove('hidden');
+
+            if (isTikTok()) {
+                const bannerText = banner?.querySelector('p:first-child');
+                if (bannerText) bannerText.textContent = '⚠️ Estás navegando desde TikTok';
+                const bannerDesc = banner?.querySelector('p:nth-child(2)');
+                if (bannerDesc) bannerDesc.textContent = 'Para que WhatsApp abra correctamente, abre esta página en Safari o Chrome.';
+
+                const celularField = document.getElementById('celular-field');
+                const celularInput = document.getElementById('celular') as HTMLInputElement;
+                if (celularField) celularField.classList.remove('hidden');
+                if (celularInput) celularInput.required = true;
+
+                const submitBtn = document.getElementById('submit-btn');
+                if (submitBtn) submitBtn.textContent = 'Enviar formulario';
+            }
+            
+            document.getElementById('copy-url-btn')?.addEventListener('click', () => {
+                copyToClipboard(window.location.href).then(() => {
+                    const btn = document.getElementById('copy-url-btn');
+                    if (btn) {
+                        btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> ¡Enlace copiado!';
+                        setTimeout(() => {
+                            btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg> Copiar enlace de esta página';
+                        }, 3000);
+                    }
+                });
+            });
         }
-    });
+
+        // --- INIT: Preseleccionar opción basada en parámetro URL ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const solucionParam = urlParams.get('solucion');
+        if (solucionParam === 'ia') {
+            const r = document.querySelector('input[name="solucion"][value="Soluciones con IA"]') as HTMLInputElement;
+            if (r) r.checked = true;
+        } else if (solucionParam === 'ventas') {
+            const r = document.querySelector('input[name="solucion"][value="Soluciones de venta"]') as HTMLInputElement;
+            if (r) r.checked = true;
+        }
+
+        // --- INIT: Modal HTML existente controls ---
+        document.getElementById('close-modal')?.addEventListener('click', () => {
+            document.getElementById('fallback-modal')?.classList.add('hidden');
+        });
+        document.getElementById('fallback-modal')?.addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('fallback-modal')?.classList.add('hidden');
+        });
+        document.getElementById('copy-msg-btn')?.addEventListener('click', () => {
+            copyToClipboard(lastMessage).then(() => {
+                const s = document.getElementById('copy-success');
+                if (s) s.classList.remove('hidden');
+                setTimeout(() => { window.location.href = 'whatsapp://'; }, 600);
+                setTimeout(() => { if (s) s.classList.add('hidden'); }, 5000);
+            });
+        });
+
+        // --- FORM SUBMISSION ---
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = e.target as HTMLFormElement;
+            const formData = new FormData(form);
+            
+            const nombre = (formData.get('nombre') as string) || '';
+            const empresa = (formData.get('empresa') as string) || '';
+            const correo = (formData.get('correo') as string) || '';
+            const celular = (formData.get('celular') as string) || '';
+            const solucion = (formData.get('solucion') as string) || '';
+            const mas = (formData.get('mas') as string) || '';
+
+            // Deshabilitar botón y mostrar loading
+            const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Enviando...';
+                submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+            }
+
+            // Preparar datos para Google Sheets
+            const sheetsData = { nombre, empresa, correo, celular, solucion, mensaje: mas };
+
+            if (isTikTok()) {
+                showTikTokSuccess();
+                sendToGoogleSheets(sheetsData);
+                return;
+            }
+
+            sendToGoogleSheets(sheetsData);
+
+            let mensaje = `*Nuevo contacto desde Inner Circle*\n\n`;
+            mensaje += `*Nombre:* ${nombre}\n`;
+            if (empresa) mensaje += `*Empresa:* ${empresa}\n`;
+            mensaje += `*Correo:* ${correo}\n`;
+            if (celular) mensaje += `*Celular:* ${celular}\n`;
+            mensaje += `*Solución de interés:* ${solucion}\n`;
+            if (mas) mensaje += `\n*Información adicional:*\n${mas}`;
+            
+            lastMessage = mensaje;
+            const urls = buildWhatsAppURLs(mensaje);
+
+            const directLink = document.getElementById('whatsapp-direct-link') as HTMLAnchorElement;
+            if (directLink) directLink.href = urls.api;
+
+            if (isInAppBrowser()) {
+                openWhatsAppInApp(mensaje, urls);
+            } else {
+                window.location.href = urls.api;
+            }
+        });
+    }
+
+    // Ejecutar en cada navegación (full load + View Transitions)
+    // astro:page-load se dispara DESPUÉS de que el DOM esté listo
+    document.addEventListener('astro:page-load', initContactForm);
 </script>
