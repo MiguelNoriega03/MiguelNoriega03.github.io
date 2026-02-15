@@ -426,7 +426,7 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
     });
 
     // --- GOOGLE SHEETS ---
-    const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwV40cJ5408EGQFzcIchArzI7P21LPteJxq7J7vRFIXdDlCC1JUK0njRvZc69ctE0BRGQ/exec';
+    const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx7FGnOL2LDbLGuea3v9SpvcbDNyFV6G7cu1iZqHQ-mNIIiLygBfA5Ih1pwla1KKOPxyg/exec';
 
     function sendToGoogleSheets(data: Record<string, string>): Promise<boolean> {
         return fetch(SHEETS_URL, {
