@@ -95,4 +95,25 @@ html.dark {
     .prose blockquote {
         @apply font-serif font-normal italic border-none pl-0 text-[1.375em] leading-snug sm:text-[1.66667em];
     }
+
+    /* Interactive card hover — lift + accent border */
+    .card-hover {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    border-color 0.3s ease;
+    }
+    .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
+        border-color: #dc2626;
+    }
+    html.dark .card-hover:hover {
+        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
+        border-color: #dc2626;
+    }
+
+    /* Smooth CTA button press */
+    .btn-press:active {
+        transform: scale(0.97);
+    }
 }
