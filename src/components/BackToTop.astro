@@ -1,0 +1,57 @@
+---
+/**
+ * BackToTop — Botón para volver al inicio de la página.
+ * - Aparece al hacer scroll > 500px
+ * - Se posiciona arriba del botón de WhatsApp
+ * - Smooth scroll al hacer click
+ */
+---
+
+<button
+    id="back-to-top"
+    class="fixed bottom-24 right-6 z-40 w-11 h-11 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 shadow-lg opacity-0 translate-y-4 pointer-events-none transition-all duration-300 hover:bg-gray-100 dark:hover:bg-zinc-700 hover:shadow-xl hover:scale-110 cursor-pointer"
+    aria-label="Volver al inicio"
+>
+    <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+    </svg>
+</button>
+
+<style>
+    #back-to-top.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+</style>
+
+<script>
+    function initBackToTop() {
+        const btn = document.getElementById('back-to-top');
+        if (!btn) return;
+
+        // Mostrar/ocultar según scroll
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    if (window.scrollY > 500) {
+                        btn.classList.add('is-visible');
+                    } else {
+                        btn.classList.remove('is-visible');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Scroll suave al inicio
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    initBackToTop();
+    document.addEventListener('astro:after-swap', initBackToTop);
+</script>
