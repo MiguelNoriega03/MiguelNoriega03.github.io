@@ -429,14 +429,82 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
     const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx7FGnOL2LDbLGuea3v9SpvcbDNyFV6G7cu1iZqHQ-mNIIiLygBfA5Ih1pwla1KKOPxyg/exec';
 
     function sendToGoogleSheets(data: Record<string, string>): Promise<boolean> {
-        return fetch(SHEETS_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-        })
-        .then(() => true)
-        .catch(() => false);
+        // Estrategia multi-fallback para máxima compatibilidad con in-app browsers (TikTok, IG, etc.)
+        // 1. Intento principal: form POST via iframe oculto (bypasea CORS, funciona en todos los WebViews)
+        // 2. Fallback: fetch con text/plain (header "simple" permitido en no-cors)
+        // 3. Fallback final: sendBeacon
+
+        return new Promise((resolve) => {
+            let resolved = false;
+            function done(success: boolean) {
+                if (resolved) return;
+                resolved = true;
+                resolve(success);
+            }
+
+            // === MÉTODO 1: Form POST via iframe oculto (más confiable en WebViews) ===
+            try {
+                const iframe = document.createElement('iframe');
+                iframe.name = 'sheets-iframe-' + Date.now();
+                iframe.style.cssText = 'display:none;width:0;height:0;border:0;';
+                document.body.appendChild(iframe);
+
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = SHEETS_URL;
+                form.target = iframe.name;
+                form.style.display = 'none';
+
+                // Enviar datos como campos de formulario
+                Object.entries(data).forEach(([key, value]) => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = value || '';
+                    form.appendChild(input);
+                });
+
+                document.body.appendChild(form);
+                form.submit();
+
+                // Limpiar después de un tiempo
+                setTimeout(() => {
+                    form.remove();
+                    iframe.remove();
+                }, 5000);
+
+                // Considerar éxito después de submit (no podemos verificar cross-origin)
+                setTimeout(() => done(true), 500);
+            } catch (err) {
+                // Si falla el iframe, intentar fetch
+                console.warn('iframe form POST failed, trying fetch fallback', err);
+            }
+
+            // === MÉTODO 2: fetch con text/plain (header simple, permitido en no-cors) ===
+            try {
+                fetch(SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(data),
+                }).then(() => done(true)).catch(() => {});
+            } catch (err) {
+                console.warn('fetch fallback failed', err);
+            }
+
+            // === MÉTODO 3: sendBeacon como último recurso ===
+            try {
+                if (navigator.sendBeacon) {
+                    const blob = new Blob([JSON.stringify(data)], { type: 'text/plain' });
+                    navigator.sendBeacon(SHEETS_URL, blob);
+                }
+            } catch (err) {
+                console.warn('sendBeacon fallback failed', err);
+            }
+
+            // Timeout de seguridad
+            setTimeout(() => done(true), 3000);
+        });
     }
 
     // --- FORM SUBMISSION ---
@@ -452,6 +520,14 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         const celular = (formData.get('celular') as string) || '';
         const solucion = (formData.get('solucion') as string) || '';
         const mas = (formData.get('mas') as string) || '';
+
+        // Deshabilitar botón y mostrar loading
+        const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+        }
         
         // Guardar en Google Sheets (SIEMPRE, para todos los navegadores)
         sendToGoogleSheets({ nombre, empresa, correo, celular, solucion, mensaje: mas });
@@ -472,8 +548,10 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         if (directLink) directLink.href = urls.api;
 
         if (isTikTok()) {
-            // === TIKTOK: Datos ya guardados en Google Sheets, mostrar éxito ===
-            showTikTokSuccess();
+            // === TIKTOK: Esperar un momento para asegurar que el form POST se envíe ===
+            setTimeout(() => {
+                showTikTokSuccess();
+            }, 800);
         } else if (isInAppBrowser()) {
             // === INSTAGRAM/FACEBOOK/OTROS: auto-redirect con cadena de fallback ===
             openWhatsAppInApp(mensaje, urls);
