@@ -426,7 +426,7 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
     });
 
     // --- GOOGLE SHEETS ---
-    const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx7FGnOL2LDbLGuea3v9SpvcbDNyFV6G7cu1iZqHQ-mNIIiLygBfA5Ih1pwla1KKOPxyg/exec';
+    const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxuTeZTTYkiiaC9XmD5CvI4b-qh5KX-JVUh-ZtFqf6JJt2f2GhKdqPvzK1Db8qXw1-Qxw/exec';
 
     function sendToGoogleSheets(data: Record<string, string>): Promise<boolean> {
         // Estrategia multi-fallback para máxima compatibilidad con in-app browsers (TikTok, IG, etc.)
