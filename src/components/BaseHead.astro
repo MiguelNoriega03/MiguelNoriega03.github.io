@@ -61,6 +61,11 @@ function formatCanonicalURL(url: string | URL) {
 <title>{title}</title>
 <meta name="generator" content={Astro.generator} />
 
+<!-- DNS Prefetch & Preconnect for external domains -->
+<link rel="dns-prefetch" href="https://script.google.com" />
+<link rel="dns-prefetch" href="https://api.whatsapp.com" />
+<link rel="preconnect" href="https://script.google.com" crossorigin />
+
 <!-- Fonts -->
 <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin="anonymous" />
 <link rel="preload" as="font" type="font/woff2" href={newsreaderWoff2} crossorigin="anonymous" />
