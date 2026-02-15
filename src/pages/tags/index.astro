@@ -129,32 +129,42 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
                 {/* Botón real <a> que aparece DESPUÉS del submit en TikTok - el usuario lo toca */}
                 <div id="tiktok-tap-zone" class="hidden">
                     <div class="text-center mb-3">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full mb-2">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        </div>
                         <p class="text-sm font-semibold text-green-700 dark:text-green-400">✅ ¡Formulario listo!</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Toca el botón para abrir WhatsApp:</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Toca el botón verde para abrir WhatsApp con tu mensaje:</p>
                     </div>
+                    
+                    {/* BOTÓN PRINCIPAL: whatsapp:// esquema nativo — NO pasa por web page */}
                     <a 
                         id="tiktok-wa-link"
                         href="#"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="flex items-center justify-center gap-3 w-full bg-green-500 hover:bg-green-600 text-white font-bold py-5 px-6 rounded-xl shadow-lg text-lg no-underline animate-pulse"
+                        class="flex items-center justify-center gap-3 w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-5 px-6 rounded-xl shadow-lg text-lg no-underline animate-pulse"
                     >
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                        👆 Toca aquí para abrir WhatsApp
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Abrir WhatsApp
                     </a>
-                    <div class="mt-3 space-y-2">
-                        <a 
-                            id="tiktok-wa-native"
-                            href="#"
-                            class="flex items-center justify-center gap-2 w-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-700 dark:text-gray-300 font-semibold py-3 px-4 rounded-xl text-sm no-underline"
-                        >
-                            Probar enlace alternativo
-                        </a>
+
+                    <div class="mt-4 space-y-2">
+                        {/* Si el botón de arriba no funciona, copiar mensaje */}
                         <button 
                             id="tiktok-copy-btn"
-                            class="flex items-center justify-center gap-2 w-full bg-gray-900 dark:bg-gray-800 hover:bg-gray-800 dark:hover:bg-gray-700 text-white font-semibold py-3 px-4 rounded-xl text-sm"
+                            class="flex items-center justify-center gap-2 w-full bg-gray-900 dark:bg-gray-800 hover:bg-gray-800 dark:hover:bg-gray-700 text-white font-semibold py-3.5 px-4 rounded-xl text-sm"
                         >
-                            📋 Copiar mensaje (pégalo en WhatsApp al +52 55 9165 9829)
+                            📋 Copiar mensaje y abrir WhatsApp
+                        </button>
+                        <p id="tiktok-copy-success" class="hidden text-xs text-center text-green-600 dark:text-green-400 font-semibold py-1">
+                            ✅ ¡Mensaje copiado! Pégalo en el chat con +52 55 9165 9829
+                        </p>
+                        <p class="text-xs text-center text-gray-400 dark:text-gray-500 mt-2">
+                            ¿No abre? Copia el enlace y ábrelo en Safari:
+                        </p>
+                        <button 
+                            id="tiktok-copy-url-btn"
+                            class="flex items-center justify-center gap-2 w-full border border-gray-300 dark:border-zinc-600 text-gray-600 dark:text-gray-400 font-medium py-2.5 px-4 rounded-xl text-xs hover:bg-gray-50 dark:hover:bg-zinc-800"
+                        >
+                            🌐 Copiar enlace para Safari / Chrome
                         </button>
                     </div>
                 </div>
@@ -304,20 +314,34 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         const submitBtn = document.getElementById('submit-btn');
         if (submitBtn) submitBtn.classList.add('hidden');
 
-        // Configurar los links reales con href
+        // BOTÓN PRINCIPAL: whatsapp:// esquema nativo — el OS lo intercepta antes que el WebView
         const waLink = document.getElementById('tiktok-wa-link') as HTMLAnchorElement;
-        const waNative = document.getElementById('tiktok-wa-native') as HTMLAnchorElement;
-        if (waLink) waLink.href = urls.api;
-        if (waNative) waNative.href = urls.native;
+        if (waLink) waLink.href = urls.native; // whatsapp://send?phone=...&text=...
 
-        // Botón de copiar mensaje
+        // Botón de copiar mensaje + abrir WhatsApp
         document.getElementById('tiktok-copy-btn')?.addEventListener('click', () => {
             copyToClipboard(message).then(() => {
                 const btn = document.getElementById('tiktok-copy-btn');
+                const successMsg = document.getElementById('tiktok-copy-success');
                 if (btn) {
-                    btn.textContent = '✅ ¡Mensaje copiado! Pégalo en WhatsApp';
+                    btn.textContent = '✅ ¡Mensaje copiado!';
                     btn.classList.remove('bg-gray-900', 'dark:bg-gray-800');
                     btn.classList.add('bg-green-600');
+                }
+                if (successMsg) successMsg.classList.remove('hidden');
+                // Intentar abrir WhatsApp con el esquema nativo tras copiar
+                setTimeout(() => { window.location.href = urls.native; }, 300);
+            });
+        });
+
+        // Botón de copiar URL para abrir en Safari/Chrome
+        document.getElementById('tiktok-copy-url-btn')?.addEventListener('click', () => {
+            copyToClipboard(urls.api).then(() => {
+                const btn = document.getElementById('tiktok-copy-url-btn');
+                if (btn) {
+                    btn.textContent = '✅ ¡Enlace copiado! Pégalo en Safari';
+                    btn.classList.remove('border-gray-300', 'dark:border-zinc-600');
+                    btn.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-900/20');
                 }
             });
         });
@@ -343,11 +367,11 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
                 <div style="font-size:48px;margin-bottom:12px;">📱</div>
                 <h3 style="font-size:18px;font-weight:700;margin-bottom:6px;">¿No se abrió WhatsApp?</h3>
                 <p style="font-size:13px;color:#666;margin-bottom:20px;">Usa una de estas opciones:</p>
-                <a href="${urls.api}" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;padding:14px;background:#25D366;color:white;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;text-decoration:none;box-sizing:border-box;text-align:center;">
-                    👆 Toca para abrir WhatsApp
+                <a href="${urls.native}" style="display:block;width:100%;padding:14px;background:#25D366;color:white;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;text-decoration:none;box-sizing:border-box;text-align:center;">
+                    📲 Abrir WhatsApp
                 </a>
-                <a href="${urls.native}" style="display:block;width:100%;padding:14px;background:#128C7E;color:white;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;text-decoration:none;box-sizing:border-box;text-align:center;">
-                    📲 Enlace alternativo
+                <a href="${urls.api}" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;padding:14px;background:#128C7E;color:white;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;text-decoration:none;box-sizing:border-box;text-align:center;">
+                    🌐 Enlace alternativo
                 </a>
                 <button id="wa-fb-copy" style="width:100%;padding:14px;background:#111;color:white;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;">
                     📋 Copiar mensaje
