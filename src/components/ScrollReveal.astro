@@ -1,0 +1,90 @@
+---
+/**
+ * ScrollReveal — Animaciones de entrada al hacer scroll.
+ * Usa IntersectionObserver (nativo, sin librerías).
+ * 
+ * Uso: Agrega class="reveal" a cualquier elemento que quieras animar.
+ * Opciones via data attributes:
+ *   data-reveal="fade-up" (default) | "fade-left" | "fade-right" | "zoom"
+ *   data-reveal-delay="100" (ms)
+ */
+---
+
+<style is:global>
+    /* === Base state (oculto) === */
+    .reveal {
+        opacity: 0;
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Fade up (default) */
+    .reveal,
+    .reveal[data-reveal="fade-up"] {
+        transform: translateY(30px);
+    }
+
+    /* Fade left */
+    .reveal[data-reveal="fade-left"] {
+        transform: translateX(-30px);
+    }
+
+    /* Fade right */
+    .reveal[data-reveal="fade-right"] {
+        transform: translateX(30px);
+    }
+
+    /* Zoom in */
+    .reveal[data-reveal="zoom"] {
+        transform: scale(0.95);
+    }
+
+    /* === Visible state === */
+    .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+    }
+
+    /* Respeta preferencia de movimiento reducido */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    function initScrollReveal() {
+        const reveals = document.querySelectorAll('.reveal:not(.is-visible)');
+        if (!reveals.length) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target as HTMLElement;
+                        const delay = parseInt(el.dataset.revealDelay || '0', 10);
+                        
+                        if (delay > 0) {
+                            setTimeout(() => el.classList.add('is-visible'), delay);
+                        } else {
+                            el.classList.add('is-visible');
+                        }
+                        observer.unobserve(el);
+                    }
+                });
+            },
+            {
+                threshold: 0.1,
+                rootMargin: '0px 0px -40px 0px'
+            }
+        );
+
+        reveals.forEach((el) => observer.observe(el));
+    }
+
+    initScrollReveal();
+    document.addEventListener('astro:after-swap', initScrollReveal);
+</script>
