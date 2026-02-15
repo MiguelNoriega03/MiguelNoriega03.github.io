@@ -4,6 +4,7 @@ import BaseHead, { type Props as HeadProps } from '../components/BaseHead.astro'
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Nav from '../components/Nav.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 
 export type Props = HeadProps & { showHeader?: boolean };
 
@@ -31,5 +32,6 @@ const { showHeader = true, ...head } = Astro.props;
             </main>
             <Footer />
         </div>
+        <WhatsAppFloat />
     </body>
 </html>
