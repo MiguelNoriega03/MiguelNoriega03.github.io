@@ -373,72 +373,22 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
         });
     }
 
-    // --- Google Sheets: enviar datos (fire-and-forget) ---
+    // --- Google Sheets: enviar datos (UN solo método para evitar duplicados) ---
     function sendToGoogleSheets(data: Record<string, string>): void {
-        // Método 1: Image pixel GET (el más compatible con WebViews)
+        // Image pixel GET: el más compatible con todos los WebViews (TikTok, IG, etc.)
+        // Un solo request = un solo registro en Sheets
         try {
             const params = new URLSearchParams(data).toString();
             const img = new Image();
             img.src = SHEETS_URL + '?' + params + '&_t=' + Date.now();
         } catch (err) {
-            console.warn('Image pixel failed', err);
-        }
-
-        // Método 2: Form POST via iframe oculto (bypasea CORS)
-        setTimeout(() => {
+            // Fallback: si Image falla, usar sendBeacon (fire-and-forget)
             try {
-                const iframe = document.createElement('iframe');
-                iframe.name = 'sheets-iframe-' + Date.now();
-                iframe.style.cssText = 'display:none;width:0;height:0;border:0;position:absolute;left:-9999px;';
-                iframe.setAttribute('tabindex', '-1');
-                iframe.setAttribute('aria-hidden', 'true');
-                document.body.appendChild(iframe);
-
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = SHEETS_URL;
-                form.target = iframe.name;
-                form.style.display = 'none';
-
-                Object.entries(data).forEach(([key, value]) => {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = value || '';
-                    form.appendChild(input);
-                });
-
-                document.body.appendChild(form);
-                form.submit();
-
-                setTimeout(() => {
-                    try { form.remove(); iframe.remove(); } catch (_) {}
-                }, 8000);
-            } catch (err) {
-                console.warn('iframe form POST failed', err);
-            }
-        }, 50);
-
-        // Método 3: fetch con text/plain
-        try {
-            fetch(SHEETS_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'text/plain' },
-                body: JSON.stringify(data),
-            }).catch(() => {});
-        } catch (err) {
-            console.warn('fetch fallback failed', err);
-        }
-
-        // Método 4: sendBeacon
-        try {
-            if (navigator.sendBeacon) {
-                const blob = new Blob([JSON.stringify(data)], { type: 'text/plain' });
-                navigator.sendBeacon(SHEETS_URL, blob);
-            }
-        } catch (err) {
-            console.warn('sendBeacon fallback failed', err);
+                if (navigator.sendBeacon) {
+                    const blob = new Blob([JSON.stringify(data)], { type: 'text/plain' });
+                    navigator.sendBeacon(SHEETS_URL, blob);
+                }
+            } catch (_) {}
         }
     }
 
