@@ -374,22 +374,25 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
     }
 
     // --- Google Sheets: enviar datos (UN solo método para evitar duplicados) ---
+    // sendBeacon es el ÚNICO método que sobrevive la navegación de página
+    // (window.location.href a WhatsApp cancela Image/fetch/iframe pendientes)
     function sendToGoogleSheets(data: Record<string, string>): void {
-        // Image pixel GET: el más compatible con todos los WebViews (TikTok, IG, etc.)
-        // Un solo request = un solo registro en Sheets
+        try {
+            if (navigator.sendBeacon) {
+                const params = new URLSearchParams(data);
+                params.append('_t', String(Date.now()));
+                const blob = new Blob([params.toString()], { type: 'application/x-www-form-urlencoded' });
+                navigator.sendBeacon(SHEETS_URL, blob);
+                return;
+            }
+        } catch (_) {}
+
+        // Fallback para navegadores sin sendBeacon: Image pixel GET
         try {
             const params = new URLSearchParams(data).toString();
             const img = new Image();
             img.src = SHEETS_URL + '?' + params + '&_t=' + Date.now();
-        } catch (err) {
-            // Fallback: si Image falla, usar sendBeacon (fire-and-forget)
-            try {
-                if (navigator.sendBeacon) {
-                    const blob = new Blob([JSON.stringify(data)], { type: 'text/plain' });
-                    navigator.sendBeacon(SHEETS_URL, blob);
-                }
-            } catch (_) {}
-        }
+        } catch (_) {}
     }
 
     // ==========================================================================
