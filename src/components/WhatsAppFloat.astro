@@ -93,6 +93,17 @@ const whatsappURL = `https://api.whatsapp.com/send?phone=${PHONE}&text=${default
             floatLink.removeAttribute('rel');
         }
 
+        // GA4: trackear clic en WhatsApp flotante
+        floatLink.addEventListener('click', () => {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'whatsapp_click', {
+                    event_category: 'cta',
+                    source: isTikTok ? 'tiktok' : 'web',
+                    link_url: floatLink.getAttribute('href'),
+                });
+            }
+        });
+
         // Mostrar tras 2s o al primer scroll (lo que pase primero)
         let shown = false;
         function show() {

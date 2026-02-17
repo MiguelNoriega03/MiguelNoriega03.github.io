@@ -64,7 +64,9 @@ function formatCanonicalURL(url: string | URL) {
 <!-- DNS Prefetch & Preconnect for external domains -->
 <link rel="dns-prefetch" href="https://script.google.com" />
 <link rel="dns-prefetch" href="https://api.whatsapp.com" />
+<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 <link rel="preconnect" href="https://script.google.com" crossorigin />
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
 <!-- Fonts -->
 <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin="anonymous" />
@@ -79,6 +81,15 @@ function formatCanonicalURL(url: string | URL) {
 <!-- Page Metadata -->
 <link rel="canonical" href={formatCanonicalURL(canonicalURL)} />
 <meta name="description" content={description} />
+
+<!-- Google Analytics 4 (via Partytown - corre en Web Worker, no bloquea el hilo principal) -->
+<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-H6LE5QT6MK"></script>
+<script type="text/partytown">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-H6LE5QT6MK');
+</script>
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={pageType} />

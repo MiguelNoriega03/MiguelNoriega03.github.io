@@ -493,6 +493,15 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
             // Preparar datos para Google Sheets
             const sheetsData = { nombre, empresa, correo, celular, solucion, mensaje: mas };
 
+            // GA4: evento de lead generado
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'generate_lead', {
+                    event_category: 'formulario',
+                    solucion: solucion,
+                    source: isTikTok() ? 'tiktok' : (isInAppBrowser() ? 'in-app-browser' : 'web'),
+                });
+            }
+
             if (isTikTok()) {
                 showTikTokSuccess();
                 sendToGoogleSheets(sheetsData);
